@@ -1,0 +1,43 @@
+<?php
+
+namespace Api\Application\{{modelName}}\Update{{modelName}};
+
+use Api\Domain\{{modelName}}\{{modelName}};
+use Api\Domain\{{modelName}}\{{modelName}}Repository;
+use ItDevgroup\CommandBus\Command;
+use ItDevgroup\CommandBus\Handler;
+
+/**
+ * Class Update{{modelName}}Handler
+ * @package Api\Application\{{modelName}}\Update{{modelName}}
+ */
+class Update{{modelName}}Handler implements Handler
+{
+    /**
+     * @var {{modelName}}Repository
+     */
+    private {{modelName}}Repository ${{modelNameSingularLowerCaseFirst}}Repository;
+
+    /**
+     * Update{{modelName}}Handler constructor.
+     * @param {{modelName}}Repository ${{modelNameSingularLowerCaseFirst}}Repository
+     */
+    public function __construct(
+        {{modelName}}Repository ${{modelNameSingularLowerCaseFirst}}Repository
+    ) {
+        $this->{{modelNameSingularLowerCaseFirst}}Repository = ${{modelNameSingularLowerCaseFirst}}Repository;
+    }
+
+    /**
+     * @param Command|Update{{modelName}} $command
+     * @return {{modelName}}
+     */
+    public function handle(Command $command): {{modelName}}
+    {
+        ${{modelNameSingularLowerCaseFirst}} = $command->{{modelNameSingularLowerCaseFirst}}();
+
+        $this->{{modelNameSingularLowerCaseFirst}}Repository->store(${{modelNameSingularLowerCaseFirst}});
+
+        return ${{modelNameSingularLowerCaseFirst}};
+    }
+}

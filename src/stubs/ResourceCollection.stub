@@ -1,0 +1,29 @@
+<?php
+
+namespace Api\Http\Resources\{{modelName}};
+
+use Api\Http\Resources\ResourceCollectionWithStandardResponse;
+
+/**
+ * Class {{modelName}}ResourceCollection
+ * @package Api\Http\Resources\{{modelName}}
+ */
+class {{modelName}}ResourceCollection extends ResourceCollectionWithStandardResponse
+{
+    /**
+     * @param object $item
+     * @return {{modelName}}Resource
+     */
+    protected function getItemData($item): {{modelName}}Resource
+    {
+        return new {{modelName}}Resource($item);
+    }
+
+    /**
+     * @return null|string
+     */
+    protected function getLinksHelperRouteName()
+    {
+        return null;
+    }
+}

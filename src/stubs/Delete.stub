@@ -1,0 +1,35 @@
+<?php
+
+namespace Api\Application\{{modelName}}\Delete{{modelName}};
+
+use Api\Domain\{{modelName}}\{{modelName}};
+use ItDevgroup\CommandBus\Command;
+
+/**
+ * Class Delete{{modelName}}
+ * @package Api\Application\{{modelName}}
+ */
+class Delete{{modelName}} implements Command
+{
+    /**
+     * @var {{modelName}}
+     */
+    private {{modelName}} ${{modelNameSingularLowerCaseFirst}};
+
+    /**
+     * Delete{{modelName}} constructor.
+     * @param {{modelName}} ${{modelNameSingularLowerCaseFirst}}
+     */
+    public function __construct({{modelName}} ${{modelNameSingularLowerCaseFirst}})
+    {
+        $this->{{modelNameSingularLowerCaseFirst}} = ${{modelNameSingularLowerCaseFirst}};
+    }
+
+    /**
+     * @return {{modelName}}
+     */
+    public function {{modelNameSingularLowerCaseFirst}}(): {{modelName}}
+    {
+        return $this->{{modelNameSingularLowerCaseFirst}};
+    }
+}

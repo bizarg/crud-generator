@@ -1,0 +1,187 @@
+<?php
+
+use Illuminate\Http\Response;
+use Tests\Feature\TestCase as BaseTestCase;
+
+/**
+ * Class {{modelName}}Test
+ * @package Tests\Feature
+ */
+class {{modelName}}Test extends BaseTestCase
+{
+    /**
+     * @test
+     */
+    public function shouldIndex{{modelName}}()
+    {
+        $this->signIn();
+
+        $this
+            ->json('get', route('api.{{modelNamePluralLowerCaseHyphen}}.index'), [], $this->headers())
+            ->assertJson([
+                'data' => [
+                    ['type' => '{{modelNameSingularLowerCase}}']
+                ]
+            ])
+            ->assertJsonStructure([
+                'data' => [
+                    [
+                        'type',
+                        'id',
+                        'attributes' => [
+                            'createdAt',
+                            'updatedAt',
+                        ],
+                    ]
+                ],
+                'meta' => [
+                    'totalPages',
+                    'totalItems',
+                ],
+            ])
+            ->assertStatus(Response::HTTP_OK);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldFilterIndex{{modelName}}()
+    {
+        $this->signIn();
+        $data = ['filter' => ['query' => '']];
+
+        $this
+            ->json('get', route('api.{{modelNamePluralLowerCaseHyphen}}.index'), $data, $this->headers())
+            ->assertJson([
+                'data' => [
+                ]
+            ])
+            ->assertJsonMissing([
+                'data' => [
+                ]
+            ])
+            ->assertStatus(Response::HTTP_OK);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldShow{{modelName}}()
+    {
+        $this->signIn();
+        $show = 1;
+
+        $this
+            ->json('get', route('api.{{modelNamePluralLowerCaseHyphen}}.show', $show), [], $this->headers())
+            ->assertJson([
+                'data' => [
+                    'type' => '{{modelNameSingularLowerCase}}',
+                    'id' => $show,
+                ]
+            ])
+            ->assertStatus(Response::HTTP_OK);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldStore{{modelName}}()
+    {
+        $this->signIn();
+        $data = [];
+
+        $this
+            ->json('post', route('api.{{modelNamePluralLowerCaseHyphen}}.store'), $data, $this->headers())
+            ->assertJson(['data' => []])
+            ->assertStatus(Response::HTTP_CREATED);
+
+        $this->assertDatabaseHas('{{modelNamePluralLowerCaseUnderscore}}', [
+        ]);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldErrorStore{{modelName}}()
+    {
+        $this->signIn();
+
+        $this
+            ->json('post', route('api.{{modelNamePluralLowerCaseHyphen}}.store'), [], $this->headers())
+            ->assertJson([
+                'errors' => [
+                ]
+            ])
+            ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldUpdate{{modelName}}()
+    {
+        $this->signIn();
+        $update = 1;
+        $data = [
+        ];
+
+        $this
+            ->json('put', route('api.{{modelNamePluralLowerCaseHyphen}}.update', $update), $data, $this->headers())
+            ->assertJson(['data' => []])
+            ->assertStatus(Response::HTTP_OK);
+
+        $this->assertDatabaseHas('{{modelNamePluralLowerCaseUnderscore}}', [
+            'id' => $update
+        ]);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldErrorUpdate{{modelName}}()
+    {
+        $this->signIn();
+        $update = 1;
+
+        $this
+            ->json('put', route('api.{{modelNamePluralLowerCaseHyphen}}.update', $update), [], $this->headers())
+            ->assertJson([
+                'errors' => [
+                ]
+            ])
+            ->assertStatus(Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldDelete{{modelName}}()
+    {
+        $this->signIn();
+        $delete = 1;
+
+        $this
+            ->json('delete', route('api.{{modelNamePluralLowerCaseHyphen}}.destroy', $delete), [], $this->headers())
+            ->assertStatus(Response::HTTP_NO_CONTENT);
+
+        $this->assertDatabaseMissing('{{modelNamePluralLowerCaseUnderscore}}', ['id' => $delete]);
+    }
+
+    /**
+     * @test
+     */
+    public function shouldErrorsDelete{{modelName}}()
+    {
+        $this->signIn();
+        $delete = 999;
+
+        $this
+            ->json('delete', route('api.{{modelNamePluralLowerCaseHyphen}}.destroy', $delete), [], $this->headers())
+            ->assertJson([
+                'errors' => [
+                    $this->errorPageNotFound()
+                ]
+            ])
+            ->assertStatus(Response::HTTP_NOT_FOUND);
+    }
+}

@@ -1,0 +1,13 @@
+<?php
+
+namespace Api\Domain\{{modelName}};
+
+use Api\Domain\Core\InterfaceRepository;
+
+/**
+ * Interface {{modelName}}Repository
+ * @package Api\Domain\{{modelName}}
+ */
+interface {{modelName}}Repository extends InterfaceRepository
+{
+}

@@ -1,0 +1,38 @@
+<?php
+
+namespace Api\Application\{{modelName}}\Delete{{modelName}};
+
+use Api\Domain\{{modelName}}\{{modelName}}Repository;
+use ItDevgroup\CommandBus\Command;
+use ItDevgroup\CommandBus\Handler;
+
+/**
+ * Class Delete{{modelName}}Handler
+ * @package Api\Application\{{modelName}}
+ */
+class Delete{{modelName}}Handler implements Handler
+{
+    /**
+     * @var {{modelName}}Repository
+     */
+    private {{modelName}}Repository ${{modelNameSingularLowerCaseFirst}}Repository;
+
+    /**
+     * Delete{{modelName}}Handler constructor.
+     * @param {{modelName}}Repository ${{modelNameSingularLowerCaseFirst}}Repository
+     */
+    public function __construct(
+        {{modelName}}Repository ${{modelNameSingularLowerCaseFirst}}Repository
+    ) {
+        $this->{{modelNameSingularLowerCaseFirst}}Repository = ${{modelNameSingularLowerCaseFirst}}Repository;
+    }
+
+    /**
+     * @param Command|Delete{{modelName}} $command
+     * @return void
+     */
+    public function handle(Command $command): void
+    {
+        $this->{{modelNameSingularLowerCaseFirst}}Repository->delete($command->{{modelNameSingularLowerCaseFirst}}());
+    }
+}

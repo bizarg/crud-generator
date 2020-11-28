@@ -1,0 +1,31 @@
+<?php
+
+namespace Api\Http\Resources\{{modelName}};
+
+use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
+
+/**
+ * Class {{modelName}}Resource
+ * @package Api\Http\Resources\{{modelName}}
+ */
+class {{modelName}}Resource extends JsonResource
+{
+    /**
+     * @param  Request  $request
+     * @return array
+     */
+    public function toArray($request): array
+    {
+        $response = [
+            'type' => '{{modelNameSingularLowerCaseFirst}}',
+            'id' => $this->id,
+            'attributes' => [
+                'createdAt' => $this->created_at,
+                'updatedAt' => $this->updated_at,
+            ],
+        ];
+
+        return $response;
+    }
+}

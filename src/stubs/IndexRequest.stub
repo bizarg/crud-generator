@@ -1,0 +1,32 @@
+<?php
+
+namespace Api\Http\Requests\{{modelName}};
+
+use Illuminate\Foundation\Http\FormRequest;
+
+/**
+ * Class {{modelName}}Request
+ * @package Api\Http\Requests\{{modelName}}
+ */
+class {{modelName}}IndexRequest extends FormRequest
+{
+    /**
+     * @return bool
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    /**
+     * @return array
+     */
+    public function rules(): array
+    {
+        return [
+            'query' => 'nullable|string|max:191',
+            'page' => 'nullable|numeric',
+            'perPage' => 'nullable|numeric',
+        ];
+    }
+}

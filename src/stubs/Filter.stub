@@ -1,0 +1,46 @@
+<?php
+
+namespace Api\Domain\{{modelName}};
+
+use Api\Domain\Core\Filter;
+use Illuminate\Http\Request;
+
+/**
+ * Class {{modelName}}Filter
+ * @package Api\Domain\{{modelName}}
+ */
+class {{modelName}}Filter implements Filter
+{
+    /**
+     * @var string|null
+     */
+    private ?string $query = null;
+
+    /**
+     * @param Request $request
+     * @return self
+     */
+    public static function fromRequest(Request $request): self
+    {
+        return (new self())
+            ->setQuery($request->input('query'));
+    }
+
+    /**
+     * @return null|string
+     */
+    public function query(): ?string
+    {
+        return $this->query;
+    }
+
+    /**
+     * @param null|string $query
+     * @return self
+     */
+    public function setQuery(?string $query): self
+    {
+        $this->query = $query;
+        return $this;
+    }
+}

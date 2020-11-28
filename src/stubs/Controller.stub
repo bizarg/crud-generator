@@ -1,0 +1,92 @@
+<?php
+
+namespace Api\Http\Controllers;
+
+use Api\Application\{{modelName}}\Delete{{modelName}}\Delete{{modelName}};
+use Api\Application\{{modelName}}\Get{{modelName}}List\Get{{modelName}}List;
+use Api\Application\{{modelName}}\Store{{modelName}}\Store{{modelName}};
+use Api\Application\{{modelName}}\Update{{modelName}}\Update{{modelName}};
+use Api\Domain\{{modelName}}\{{modelName}};
+use Api\Http\Requests\{{modelName}}\List{{modelName}}Request;
+use Api\Http\Requests\{{modelName}}\Store{{modelName}}Request;
+use Api\Http\Requests\{{modelName}}\Update{{modelName}}Request;
+use Api\Http\Resources\{{modelName}}\{{modelName}}Resource;
+use Api\Http\Resources\{{modelName}}\{{modelName}}ResourceCollection;
+use Api\Domain\{{modelName}}\{{modelName}}Filter;
+use Api\Domain\Core\Order;
+use Api\Domain\Core\Pagination;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
+
+/**
+ * Class {{modelName}}Controller
+ * @package Api\Http\Controllers
+ */
+class {{modelName}}Controller extends Controller
+{
+    /**
+     * @param List{{modelName}}Request $request
+     * @return JsonResponse
+     */
+    public function index(List{{modelName}}Request $request): JsonResponse
+    {
+        $order = Order::fromRequest($request, {{modelName}}::ALLOWED_SORT_FIELDS);
+        $pagination = Pagination::fromRequest($request);
+        $filter = {{modelName}}Filter::fromRequest($request);
+
+        ${{modelNamePluralLowerCase}} = $this->dispatchCommand(new Get{{modelName}}List($filter, $pagination, $order));
+
+        return new JsonResponse(
+            new {{modelName}}ResourceCollection(${{modelNamePluralLowerCase}})
+        );
+    }
+
+    /**
+     * @param Store{{modelName}}Request $request
+     * @return JsonResponse
+     */
+    public function store(Store{{modelName}}Request $request): JsonResponse
+    {
+        ${{modelNameSingularLowerCase}} = $this->dispatchCommand(Store{{modelName}}::fromRequest($request));
+
+        return new JsonResponse([
+            'data' => new {{modelName}}Resource(${{modelNameSingularLowerCase}})
+        ], Response::HTTP_CREATED);
+    }
+
+    /**
+     * @param Update{{modelName}}Request $request
+     * @param {{modelName}} ${{modelNameSingularLowerCase}}
+     * @return JsonResponse
+     */
+    public function update(Update{{modelName}}Request $request, {{modelName}} ${{modelNameSingularLowerCase}}): JsonResponse
+    {
+        ${{modelNameSingularLowerCase}} = $this->dispatchCommand(Update{{modelName}}::fromRequest($request, ${{modelNameSingularLowerCase}}));
+
+        return new JsonResponse([
+            'data' => new {{modelName}}Resource(${{modelNameSingularLowerCase}})
+        ]);
+    }
+
+    /**
+     * @param {{modelName}} ${{modelNameSingularLowerCase}}
+     * @return JsonResponse
+     */
+    public function show({{modelName}} ${{modelNameSingularLowerCase}}): JsonResponse
+    {
+        return new JsonResponse([
+            'data' => new {{modelName}}Resource(${{modelNameSingularLowerCase}})
+        ]);
+    }
+
+    /**
+     * @param {{modelName}} ${{modelNameSingularLowerCase}}
+     * @return JsonResponse
+     */
+    public function destroy({{modelName}} ${{modelNameSingularLowerCase}}): JsonResponse
+    {
+        $this->dispatchCommand(new Delete{{modelName}}(${{modelNameSingularLowerCase}}));
+
+        return new JsonResponse(null, Response::HTTP_NO_CONTENT);
+    }
+}

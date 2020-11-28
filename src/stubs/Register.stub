@@ -1,0 +1,31 @@
+<?php
+
+namespace Api\Application\{{modelName}}\Store{{modelName}};
+
+use Api\Http\Requests\{{modelName}}\Store{{modelName}}Request;
+use Illuminate\Http\Request;
+use ItDevgroup\CommandBus\Command;
+
+/**
+ * Class Store{{modelName}}
+ * @package Api\Application\{{modelName}}
+ */
+class Store{{modelName}} implements Command
+{
+    /**
+     * Store{{modelName}} constructor.
+     */
+    public function __construct(
+    ) {
+    }
+
+    /**
+     * @param Request|Store{{modelName}}Request $request
+     * @return self
+     */
+    public static function fromRequest(Request $request): self
+    {
+        return (new self(
+        ));
+    }
+}

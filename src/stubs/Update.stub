@@ -1,0 +1,50 @@
+<?php
+
+namespace Api\Application\{{modelName}}\Update{{modelName}};
+
+use Api\Domain\{{modelName}}\{{modelName}};
+use Api\Http\Requests\{{modelName}}\Update{{modelName}}Request;
+use Illuminate\Http\Request;
+use ItDevgroup\CommandBus\Command;
+
+/**
+ * Class Update{{modelName}}
+ * @package Api\Application\{{modelName}}\Update{{modelName}}
+ */
+class Update{{modelName}} implements Command
+{
+    /**
+     * @var {{modelName}}
+     */
+    private {{modelName}} ${{modelNameSingularLowerCaseFirst}};
+
+    /**
+     * Update{{modelName}} constructor.
+     * @param {{modelName}} ${{modelNameSingularLowerCaseFirst}}
+     */
+    public function __construct(
+        {{modelName}} ${{modelNameSingularLowerCaseFirst}}
+    ) {
+        $this->{{modelNameSingularLowerCaseFirst}} = ${{modelNameSingularLowerCaseFirst}};
+    }
+
+    /**
+     * @param Request|Update{{modelName}}Request $request
+     * @param {{modelName}} ${{modelNameSingularLowerCaseFirst}}
+     * @return self
+     */
+    public static function fromRequest(Request $request, {{modelName}} ${{modelNameSingularLowerCaseFirst}}): self
+    {
+        return (new self(
+            ${{modelNameSingularLowerCaseFirst}}
+        ));
+    }
+
+    /**
+     * @return {{modelName}}
+     */
+    public function {{modelNameSingularLowerCaseFirst}}(): {{modelName}}
+    {
+        return $this->{{modelNameSingularLowerCaseFirst}};
+    }
+}

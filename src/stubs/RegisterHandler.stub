@@ -1,0 +1,43 @@
+<?php
+
+namespace Api\Application\{{modelName}}\Store{{modelName}};
+
+use Api\Domain\{{modelName}}\{{modelName}};
+use Api\Domain\{{modelName}}\{{modelName}}Repository;
+use ItDevgroup\CommandBus\Command;
+use ItDevgroup\CommandBus\Handler;
+
+/**
+ * Class Store{{modelName}}Handler
+ * @package Api\Application\{{modelName}}
+ */
+class Store{{modelName}}Handler implements Handler
+{
+    /**
+     * @var {{modelName}}Repository
+     */
+    private {{modelName}}Repository ${{modelNameSingularLowerCaseFirst}}Repository;
+
+    /**
+     * Store{{modelName}}Handler constructor.
+     * @param {{modelName}}Repository ${{modelNameSingularLowerCaseFirst}}Repository
+     */
+    public function __construct(
+        {{modelName}}Repository ${{modelNameSingularLowerCaseFirst}}Repository
+    ) {
+        $this->{{modelNameSingularLowerCaseFirst}}Repository = ${{modelNameSingularLowerCaseFirst}}Repository;
+    }
+
+    /**
+     * @param Command|Store{{modelName}} $command
+     * @return {{modelName}}
+     */
+    public function handle(Command $command): {{modelName}}
+    {
+        ${{modelNameSingularLowerCaseFirst}} = {{modelName}}::register();
+
+        $this->{{modelNameSingularLowerCaseFirst}}Repository->store(${{modelNameSingularLowerCaseFirst}});
+
+        return ${{modelNameSingularLowerCaseFirst}};
+    }
+}

@@ -1,0 +1,28 @@
+<?php
+
+namespace Api\Http\Requests\{{modelName}};
+
+use Illuminate\Foundation\Http\FormRequest;
+
+/**
+ * Class {{modelName}}Request
+ * @package Api\Http\Requests\{{modelName}}
+ */
+class Store{{modelName}}Request extends FormRequest
+{
+    /**
+     * @return bool
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    /**
+     * @return array
+     */
+    public function rules(): array
+    {
+        return [];
+    }
+}

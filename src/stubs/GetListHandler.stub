@@ -1,0 +1,44 @@
+<?php
+
+namespace Api\Application\{{modelName}}\Get{{modelName}}List;
+
+use Api\Domain\{{modelName}}\{{modelName}}Repository;
+use ItDevgroup\CommandBus\Command;
+use ItDevgroup\CommandBus\Handler;
+
+/**
+ * Class Get{{modelName}}ListHandler
+ * @package Api\Application\{{modelName}}\Get{{modelName}}List
+ */
+class Get{{modelName}}ListHandler implements Handler
+{
+    /**
+     * @var {{modelName}}Repository
+     */
+    private {{modelName}}Repository ${{modelNameSingularLowerCaseFirst}}Repository;
+
+    /**
+     * Get{{modelName}}ListHandler constructor.
+     * @param {{modelName}}Repository ${{modelNameSingularLowerCaseFirst}}Repository
+     */
+    public function __construct(
+        {{modelName}}Repository ${{modelNameSingularLowerCaseFirst}}Repository
+    ) {
+        $this->{{modelNameSingularLowerCaseFirst}}Repository = ${{modelNameSingularLowerCaseFirst}}Repository;
+    }
+
+    /**
+     * Handle a Command object
+     *
+     * @param Command|Get{{modelName}}List $command
+     * @return mixed
+     */
+    public function handle(Command $command)
+    {
+        return $this->{{modelNameSingularLowerCaseFirst}}Repository->all(
+            $command->filter(),
+            $command->pagination(),
+            $command->order()
+        );
+    }
+}

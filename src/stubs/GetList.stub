@@ -1,0 +1,68 @@
+<?php
+
+namespace Api\Application\{{modelName}}\Get{{modelName}}List;
+
+use App\Domain\Core\Order;
+use App\Domain\Core\Pagination;
+use Api\Domain\{{modelName}}\{{modelName}}Filter;
+use ItDevgroup\CommandBus\Command;
+
+/**
+ * Class Get{{modelName}}List
+ * @package Api\Application\{{modelName}}\Get{{modelName}}List
+ */
+class Get{{modelName}}List implements Command
+{
+    /**
+     * @var {{modelName}}Filter|null
+     */
+    private ?{{modelName}}Filter $filter;
+    /**
+     * @var Pagination|null
+     */
+    private ?Pagination $pagination;
+    /**
+     * @var Order|null
+     */
+    private ?Order $order;
+
+    /**
+     * Get{{modelName}}List constructor.
+     * @param {{modelName}}Filter $filter
+     * @param Pagination|null $pagination
+     * @param Order|null $order
+     */
+    public function __construct(
+        {{modelName}}Filter $filter = null,
+        Pagination $pagination = null,
+        Order $order = null
+    ) {
+        $this->filter = $filter;
+        $this->pagination = $pagination;
+        $this->order = $order;
+    }
+
+    /**
+     * @return {{modelName}}Filter|null
+     */
+    public function filter(): ?{{modelName}}Filter
+    {
+        return $this->filter;
+    }
+
+    /**
+     * @return Pagination|null
+     */
+    public function pagination(): ?Pagination
+    {
+        return $this->pagination;
+    }
+
+    /**
+     * @return Order|null
+     */
+    public function order(): ?Order
+    {
+        return $this->order;
+    }
+}
