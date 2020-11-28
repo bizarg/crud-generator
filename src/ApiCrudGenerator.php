@@ -2,7 +2,7 @@
 
 namespace Bizarg\Crud;
 
-use Api\Infrastructure\UseCase\StringCase;
+use Bizarg\StringHelper;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
@@ -286,7 +286,7 @@ class ApiCrudGenerator extends Command
         $this->makePath($path);
 
         $filename = Carbon::now()->format('Y_m_d_His')
-            . '_create_' . StringCase::toUnderscore(Str::plural($name)) . '_table.php';
+            . '_create_' . StringHelper::toUnderscore(Str::plural($name)) . '_table.php';
 
         $this->put($path . "/" . $filename, 'Migrate');
     }
@@ -300,7 +300,7 @@ class ApiCrudGenerator extends Command
 
         $this->makePath($path);
 
-        $this->put($path . "/api-" . strtolower(StringCase::toHyphen(Str::plural($name))) . ".php", 'ApiDoc');
+        $this->put($path . "/api-" . strtolower(StringHelper::toHyphen(Str::plural($name))) . ".php", 'ApiDoc');
     }
 
     /**
@@ -352,12 +352,12 @@ class ApiCrudGenerator extends Command
             ],
             [
                 $name,
-                StringCase::camelCase($name),
-                StringCase::camelCase(Str::plural($name)),
-                StringCase::camelCase($name),
-                StringCase::toUnderscore(Str::plural($name)),
+                StringHelper::camelCase($name),
+                StringHelper::camelCase(Str::plural($name)),
+                StringHelper::camelCase($name),
+                StringHelper::toUnderscore(Str::plural($name)),
                 Str::plural($name),
-                StringCase::toHyphen(Str::plural($name)),
+                StringHelper::toHyphen(Str::plural($name)),
             ],
             $this->getStub($template)
         );
