@@ -1,0 +1,22 @@
+{
+    "name": "bizarg/crud-generator",
+    "description": "crud generator",
+    "version": "1.0",
+    "authors": [
+        {
+            "name": "Aleksandr",
+            "email": "aleksandr.chyzhevskiy@it-devgroup.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Bizarg\\Crud\\": "src/"
+        }
+    },
+    "require": {
+        "illuminate/console": "6.*",
+        "illuminate/support": "6.*",
+        "bizarg/string-helper": "dev"
+    }
+}
