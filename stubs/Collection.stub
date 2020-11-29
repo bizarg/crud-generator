@@ -1,0 +1,201 @@
+{
+	"info": {
+		"name": "{{modelName}}",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "{{modelNamePluralLowerCaseHyphen}}",
+			"item": [
+				{
+					"name": "{{modelNamePluralLowerCaseHyphen}}.index",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/{{modelNamePluralLowerCaseHyphen}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{modelNamePluralLowerCaseHyphen}}"
+							],
+							"query": [
+                            	{
+                            		"key": "page[number]",
+                            		"value": "1"
+                            	},
+                            	{
+                            		"key": "page[size]",
+                            		"value": "20"
+                            	},
+                            	{
+                            		"key": "sort",
+                            		"value": "",
+                            		"disabled": true
+                            	}
+                            ]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{modelNamePluralLowerCaseHyphen}}.show",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/{{modelNamePluralLowerCaseHyphen}}/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{modelNamePluralLowerCaseHyphen}}",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{modelNamePluralLowerCaseHyphen}}.store",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{host}}/{{modelNamePluralLowerCaseHyphen}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{modelNamePluralLowerCaseHyphen}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{modelNamePluralLowerCaseHyphen}}.update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{host}}/{{modelNamePluralLowerCaseHyphen}}/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{modelNamePluralLowerCaseHyphen}}",
+								"1"
+							],
+							"query": []
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{modelNamePluralLowerCaseHyphen}}.delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{host}}/{{modelNamePluralLowerCaseHyphen}}/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"{{modelNamePluralLowerCaseHyphen}}",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"variable": [
+	],
+	"protocolProfileBehavior": {}
+}

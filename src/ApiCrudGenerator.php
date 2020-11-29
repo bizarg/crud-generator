@@ -1,8 +1,8 @@
 <?php
 
 namespace Bizarg\Crud;
-
-use Bizarg\StringHelper\StringHelper;
+use Api\Infrastructure\UseCase\StringCase as StringHelper;
+//use Bizarg\StringHelper\StringHelper;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
@@ -49,6 +49,11 @@ class ApiCrudGenerator extends Command
         $this->test($name);
         $this->migrate($name);
         $this->apiDoc($name);
+
+        if (config('crud-generator.generate.collection', true)) {
+            $this->collection($name);
+        }
+
 
         file_put_contents(
             base_path('routes/api.php'),
@@ -296,11 +301,23 @@ class ApiCrudGenerator extends Command
      */
     protected function apiDoc(string $name)
     {
-        $path = "api-doc";
+        $path = 'api-doc';
 
         $this->makePath($path);
 
         $this->put($path . "/api-" . strtolower(StringHelper::toHyphen(Str::plural($name))) . ".php", 'ApiDoc');
+    }
+
+    /**
+     * @param string $name
+     */
+    protected function collection(string $name)
+    {
+        $path = 'api-doc/collections';
+
+        $this->makePath($path);
+
+        $this->put($path . "/{$name}.json", 'Collection');
     }
 
     /**
