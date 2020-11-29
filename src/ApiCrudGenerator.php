@@ -2,7 +2,7 @@
 
 namespace Bizarg\Crud;
 
-use Bizarg\StringHelper;
+use Bizarg\StringHelper\StringHelper;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
