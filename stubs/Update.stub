@@ -1,15 +1,14 @@
-<?php
 
-namespace Api\Application\{{modelName}}\Update{{modelName}};
+namespace {{namespace}}\Application\{{modelName}}\Update{{modelName}};
 
-use Api\Domain\{{modelName}}\{{modelName}};
-use Api\Http\Requests\{{modelName}}\Update{{modelName}}Request;
+use {{namespace}}\Domain\{{modelName}}\{{modelName}};
+use {{namespace}}\Http\Requests\{{modelName}}\Update{{modelName}}Request;
 use Illuminate\Http\Request;
 use ItDevgroup\CommandBus\Command;
 
 /**
  * Class Update{{modelName}}
- * @package Api\Application\{{modelName}}\Update{{modelName}}
+ * @package {{namespace}}\Application\{{modelName}}\Update{{modelName}}
  */
 class Update{{modelName}} implements Command
 {

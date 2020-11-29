@@ -1,14 +1,13 @@
-<?php
 
-namespace Api\Application\{{modelName}}\Store{{modelName}};
+namespace {{namespace}}\Application\{{modelName}}\Store{{modelName}};
 
-use Api\Http\Requests\{{modelName}}\Store{{modelName}}Request;
+use {{namespace}}\Http\Requests\{{modelName}}\Store{{modelName}}Request;
 use Illuminate\Http\Request;
 use ItDevgroup\CommandBus\Command;
 
 /**
  * Class Store{{modelName}}
- * @package Api\Application\{{modelName}}
+ * @package {{namespace}}\Application\{{modelName}}
  */
 class Store{{modelName}} implements Command
 {

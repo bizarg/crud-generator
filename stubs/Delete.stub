@@ -1,13 +1,12 @@
-<?php
 
-namespace Api\Application\{{modelName}}\Delete{{modelName}};
+namespace {{namespace}}\Application\{{modelName}}\Delete{{modelName}};
 
-use Api\Domain\{{modelName}}\{{modelName}};
+use {{namespace}}\Domain\{{modelName}}\{{modelName}};
 use ItDevgroup\CommandBus\Command;
 
 /**
  * Class Delete{{modelName}}
- * @package Api\Application\{{modelName}}
+ * @package {{namespace}}\Application\{{modelName}}
  */
 class Delete{{modelName}} implements Command
 {

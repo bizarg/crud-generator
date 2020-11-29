@@ -1,14 +1,13 @@
-<?php
 
-namespace Api\Application\{{modelName}}\Get{{modelName}}List;
+namespace {{namespace}}\Application\{{modelName}}\Get{{modelName}}List;
 
-use Api\Domain\{{modelName}}\{{modelName}}Repository;
+use {{namespace}}\Domain\{{modelName}}\{{modelName}}Repository;
 use ItDevgroup\CommandBus\Command;
 use ItDevgroup\CommandBus\Handler;
 
 /**
  * Class Get{{modelName}}ListHandler
- * @package Api\Application\{{modelName}}\Get{{modelName}}List
+ * @package {{namespace}}\Application\{{modelName}}\Get{{modelName}}List
  */
 class Get{{modelName}}ListHandler implements Handler
 {

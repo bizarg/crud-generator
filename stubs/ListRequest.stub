@@ -1,12 +1,11 @@
-<?php
 
-namespace Api\Http\Requests\{{modelName}};
+namespace {{namespace}}\Http\Requests\{{modelName}};
 
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
  * Class {{modelName}}Request
- * @package Api\Http\Requests\{{modelName}}
+ * @package {{namespace}}\Http\Requests\{{modelName}}
  */
 class List{{modelName}}Request extends FormRequest
 {

@@ -1,14 +1,13 @@
-<?php
 
-namespace Api\Application\{{modelName}}\Delete{{modelName}};
+namespace {{namespace}}\Application\{{modelName}}\Delete{{modelName}};
 
-use Api\Domain\{{modelName}}\{{modelName}}Repository;
+use {{namespace}}\Domain\{{modelName}}\{{modelName}}Repository;
 use ItDevgroup\CommandBus\Command;
 use ItDevgroup\CommandBus\Handler;
 
 /**
  * Class Delete{{modelName}}Handler
- * @package Api\Application\{{modelName}}
+ * @package {{namespace}}\Application\{{modelName}}
  */
 class Delete{{modelName}}Handler implements Handler
 {

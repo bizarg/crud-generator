@@ -1,12 +1,11 @@
-<?php
 
-namespace Api\Domain\{{modelName}};
+namespace {{namespace}}\Domain\{{modelName}};
 
-use Api\Domain\Core\EntityNotFound;
+use {{namespace}}\Domain\Core\EntityNotFound;
 
 /**
  * Class {{modelName}}NotFound
- * @package Api\Domain\{{modelName}}
+ * @package {{namespace}}\Domain\{{modelName}}
  */
 class {{modelName}}NotFound extends EntityNotFound
 {

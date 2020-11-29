@@ -1,15 +1,14 @@
-<?php
 
-namespace Api\Application\{{modelName}}\Store{{modelName}};
+namespace {{namespace}}\Application\{{modelName}}\Store{{modelName}};
 
-use Api\Domain\{{modelName}}\{{modelName}};
-use Api\Domain\{{modelName}}\{{modelName}}Repository;
+use {{namespace}}\Domain\{{modelName}}\{{modelName}};
+use {{namespace}}\Domain\{{modelName}}\{{modelName}}Repository;
 use ItDevgroup\CommandBus\Command;
 use ItDevgroup\CommandBus\Handler;
 
 /**
  * Class Store{{modelName}}Handler
- * @package Api\Application\{{modelName}}
+ * @package {{namespace}}\Application\{{modelName}}
  */
 class Store{{modelName}}Handler implements Handler
 {

@@ -1,15 +1,14 @@
-<?php
 
-namespace Api\Application\{{modelName}}\Update{{modelName}};
+namespace {{namespace}}\Application\{{modelName}}\Update{{modelName}};
 
-use Api\Domain\{{modelName}}\{{modelName}};
-use Api\Domain\{{modelName}}\{{modelName}}Repository;
+use {{namespace}}\Domain\{{modelName}}\{{modelName}};
+use {{namespace}}\Domain\{{modelName}}\{{modelName}}Repository;
 use ItDevgroup\CommandBus\Command;
 use ItDevgroup\CommandBus\Handler;
 
 /**
  * Class Update{{modelName}}Handler
- * @package Api\Application\{{modelName}}\Update{{modelName}}
+ * @package {{namespace}}\Application\{{modelName}}\Update{{modelName}}
  */
 class Update{{modelName}}Handler implements Handler
 {

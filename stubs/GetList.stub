@@ -1,15 +1,14 @@
-<?php
 
-namespace Api\Application\{{modelName}}\Get{{modelName}}List;
+namespace {{namespace}}\Application\{{modelName}}\Get{{modelName}}List;
 
 use App\Domain\Core\Order;
 use App\Domain\Core\Pagination;
-use Api\Domain\{{modelName}}\{{modelName}}Filter;
+use {{namespace}}\Domain\{{modelName}}\{{modelName}}Filter;
 use ItDevgroup\CommandBus\Command;
 
 /**
  * Class Get{{modelName}}List
- * @package Api\Application\{{modelName}}\Get{{modelName}}List
+ * @package {{namespace}}\Application\{{modelName}}\Get{{modelName}}List
  */
 class Get{{modelName}}List implements Command
 {

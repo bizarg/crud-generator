@@ -1,6 +1,5 @@
-<?php
 
-namespace Api\Domain\{{modelName}};
+namespace {{namespace}}\Domain\{{modelName}};
 
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
@@ -9,7 +8,7 @@ use Carbon\Carbon;
 
 /**
  * Class {{modelName}}
- * @package Api\Domain\{{modelName}}
+ * @package {{namespace}}\Domain\{{modelName}}
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property Carbon|null $deleted_at

@@ -337,7 +337,7 @@ class ApiCrudGenerator extends Command
     protected function getStub($type)
     {
         return file_get_contents(
-            rtrim(config('crud-generator.path.stubs', __DIR__ . '/../stubs'), '/') . "/$type.stub"
+            rtrim(config('crud-generator.path.stubs') ?? __DIR__ . '/../stubs', '/') . "/$type.stub"
         );
     }
 
@@ -355,12 +355,19 @@ class ApiCrudGenerator extends Command
      * @param string $template
      * @return string|string[]
      */
-    protected function variableTemplate(string $template)
+    protected function variableTemplate(string $template): string
     {
         $name = $this->argument('name');
 
-        return str_replace(
+        $string = '<?php' . PHP_EOL;
+
+        if (config('crud-generator.declare', true)) {
+            $string .= PHP_EOL . 'declare(strict_types=1);' . PHP_EOL;
+        }
+
+        $string .= str_replace(
             [
+                '{{namespace}}',
                 '{{modelName}}',
                 '{{modelNameSingularLowerCaseFirst}}',
                 '{{modelNamePluralLowerCase}}',
@@ -369,6 +376,7 @@ class ApiCrudGenerator extends Command
                 '{{modelNamePluralLowerCaseHyphen}}',
             ],
             [
+                ucfirst(config('crud-generator.path.dir', 'api')),
                 $name,
                 StringHelper::camelCase($name),
                 StringHelper::camelCase(Str::plural($name)),
@@ -378,5 +386,7 @@ class ApiCrudGenerator extends Command
             ],
             $this->getStub($template)
         );
+
+        return $string;
     }
 }

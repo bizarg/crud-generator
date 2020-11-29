@@ -1,18 +1,17 @@
-<?php
 
-namespace Api\Infrastructure\Eloquent;
+namespace {{namespace}}\Infrastructure\Eloquent;
 
-use Api\Domain\Core\Filter;
-use Api\Domain\{{modelName}}\{{modelName}};
-use Api\Domain\{{modelName}}\{{modelName}}Filter;
-use Api\Domain\{{modelName}}\{{modelName}}Repository;
+use {{namespace}}\Domain\Core\Filter;
+use {{namespace}}\Domain\{{modelName}}\{{modelName}};
+use {{namespace}}\Domain\{{modelName}}\{{modelName}}Filter;
+use {{namespace}}\Domain\{{modelName}}\{{modelName}}Repository;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\DB;
 
 /**
  * Class Eloquent{{modelName}}Repository
- * @package Api\Infrastructure\Eloquent
+ * @package {{namespace}}\Infrastructure\Eloquent
  */
 class Eloquent{{modelName}}Repository extends AbstractEloquentRepository implements {{modelName}}Repository
 {

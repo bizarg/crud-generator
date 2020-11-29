@@ -1,12 +1,11 @@
-<?php
 
-namespace Api\Http\Resources\{{modelName}};
+namespace {{namespace}}\Http\Resources\{{modelName}};
 
-use Api\Http\Resources\ResourceCollectionWithStandardResponse;
+use {{namespace}}\Http\Resources\ResourceCollectionWithStandardResponse;
 
 /**
  * Class {{modelName}}ResourceCollection
- * @package Api\Http\Resources\{{modelName}}
+ * @package {{namespace}}\Http\Resources\{{modelName}}
  */
 class {{modelName}}ResourceCollection extends ResourceCollectionWithStandardResponse
 {

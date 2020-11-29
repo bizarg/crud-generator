@@ -1,12 +1,11 @@
-<?php
 
-namespace Api\Domain\{{modelName}};
+namespace {{namespace}}\Domain\{{modelName}};
 
-use Api\Domain\Core\InterfaceRepository;
+use {{namespace}}\Domain\Core\InterfaceRepository;
 
 /**
  * Interface {{modelName}}Repository
- * @package Api\Domain\{{modelName}}
+ * @package {{namespace}}\Domain\{{modelName}}
  */
 interface {{modelName}}Repository extends InterfaceRepository
 {

@@ -7,5 +7,6 @@ return [
     ],
     'generate' => [
         'collection' => true
-    ]
+    ],
+    'declare' => true
 ];

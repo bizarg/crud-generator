@@ -1,26 +1,25 @@
-<?php
 
-namespace Api\Http\Controllers;
+namespace {{namespace}}\Http\Controllers;
 
-use Api\Application\{{modelName}}\Delete{{modelName}}\Delete{{modelName}};
-use Api\Application\{{modelName}}\Get{{modelName}}List\Get{{modelName}}List;
-use Api\Application\{{modelName}}\Store{{modelName}}\Store{{modelName}};
-use Api\Application\{{modelName}}\Update{{modelName}}\Update{{modelName}};
-use Api\Domain\{{modelName}}\{{modelName}};
-use Api\Http\Requests\{{modelName}}\List{{modelName}}Request;
-use Api\Http\Requests\{{modelName}}\Store{{modelName}}Request;
-use Api\Http\Requests\{{modelName}}\Update{{modelName}}Request;
-use Api\Http\Resources\{{modelName}}\{{modelName}}Resource;
-use Api\Http\Resources\{{modelName}}\{{modelName}}ResourceCollection;
-use Api\Domain\{{modelName}}\{{modelName}}Filter;
-use Api\Domain\Core\Order;
-use Api\Domain\Core\Pagination;
+use {{namespace}}\Application\{{modelName}}\Delete{{modelName}}\Delete{{modelName}};
+use {{namespace}}\Application\{{modelName}}\Get{{modelName}}List\Get{{modelName}}List;
+use {{namespace}}\Application\{{modelName}}\Store{{modelName}}\Store{{modelName}};
+use {{namespace}}\Application\{{modelName}}\Update{{modelName}}\Update{{modelName}};
+use {{namespace}}\Domain\{{modelName}}\{{modelName}};
+use {{namespace}}\Http\Requests\{{modelName}}\List{{modelName}}Request;
+use {{namespace}}\Http\Requests\{{modelName}}\Store{{modelName}}Request;
+use {{namespace}}\Http\Requests\{{modelName}}\Update{{modelName}}Request;
+use {{namespace}}\Http\Resources\{{modelName}}\{{modelName}}Resource;
+use {{namespace}}\Http\Resources\{{modelName}}\{{modelName}}ResourceCollection;
+use {{namespace}}\Domain\{{modelName}}\{{modelName}}Filter;
+use {{namespace}}\Domain\Core\Order;
+use {{namespace}}\Domain\Core\Pagination;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 
 /**
  * Class {{modelName}}Controller
- * @package Api\Http\Controllers
+ * @package {{namespace}}\Http\Controllers
  */
 class {{modelName}}Controller extends Controller
 {
