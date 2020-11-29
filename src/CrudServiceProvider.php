@@ -24,7 +24,7 @@ class CrudServiceProvider extends ServiceProvider
 
         if (method_exists($this, 'publishes')) {
             $this->publishes([
-                __DIR__ . '/../stubs' => base_path('/resources/stubs'),
+                __DIR__ . '/../stubs' => base_path('/resources/stubs/'),
             ], 'crud-generator-stubs');
             $this->publishes([
                 __DIR__ . '/../config/crud-generator.php' => $this->configPath('crud-generator.php'),

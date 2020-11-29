@@ -2,6 +2,7 @@
 
 return [
     'path' => [
-        'directory' => 'api',
+        'dir' => 'api',
+        'stubs' => null,
     ]
 ];

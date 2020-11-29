@@ -20,7 +20,7 @@ class {{modelName}}Test extends BaseTestCase
             ->json('get', route('api.{{modelNamePluralLowerCaseHyphen}}.index'), [], $this->headers())
             ->assertJson([
                 'data' => [
-                    ['type' => '{{modelNameSingularLowerCase}}']
+                    ['type' => '{{modelNameSingularLowerCaseFirst}}']
                 ]
             ])
             ->assertJsonStructure([
@@ -75,7 +75,7 @@ class {{modelName}}Test extends BaseTestCase
             ->json('get', route('api.{{modelNamePluralLowerCaseHyphen}}.show', $show), [], $this->headers())
             ->assertJson([
                 'data' => [
-                    'type' => '{{modelNameSingularLowerCase}}',
+                    'type' => '{{modelNameSingularLowerCaseFirst}}',
                     'id' => $show,
                 ]
             ])

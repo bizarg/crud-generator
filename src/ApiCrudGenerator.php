@@ -62,7 +62,7 @@ class ApiCrudGenerator extends Command
      */
     protected function model(string $name)
     {
-        $path = "api/Domain/{$name}";
+        $path = config('crud-generator.path.dir', 'api') . "/Domain/{$name}";
 
         $this->makePath($path);
 
@@ -74,7 +74,7 @@ class ApiCrudGenerator extends Command
      */
     protected function filter(string $name)
     {
-        $path = "api/Domain/{$name}";
+        $path = config('crud-generator.path.dir', 'api') . "/Domain/{$name}";
 
         $this->makePath($path);
 
@@ -86,7 +86,7 @@ class ApiCrudGenerator extends Command
      */
     protected function notFound(string $name)
     {
-        $path = "api/Domain/{$name}";
+        $path = config('crud-generator.path.dir', 'api') . "/Domain/{$name}";
 
         $this->makePath($path);
 
@@ -98,7 +98,7 @@ class ApiCrudGenerator extends Command
      */
     protected function repository(string $name)
     {
-        $path = "api/Domain/{$name}";
+        $path = config('crud-generator.path.dir', 'api') . "/Domain/{$name}";
 
         $this->makePath($path);
 
@@ -110,7 +110,7 @@ class ApiCrudGenerator extends Command
      */
     protected function delete(string $name)
     {
-        $path = "api/Application/{$name}/Delete{$name}";
+        $path = config('crud-generator.path.dir', 'api') . "/Application/{$name}/Delete{$name}";
 
         $this->makePath($path);
 
@@ -122,7 +122,7 @@ class ApiCrudGenerator extends Command
      */
     protected function deleteHandler(string $name)
     {
-        $path = "api/Application/{$name}/Delete{$name}";
+        $path = config('crud-generator.path.dir', 'api') . "/Application/{$name}/Delete{$name}";
 
         $this->makePath($path);
 
@@ -134,7 +134,7 @@ class ApiCrudGenerator extends Command
      */
     protected function register(string $name)
     {
-        $path = "api/Application/{$name}/Store{$name}";
+        $path = config('crud-generator.path.dir', 'api') . "/Application/{$name}/Store{$name}";
 
         $this->makePath($path);
 
@@ -146,7 +146,7 @@ class ApiCrudGenerator extends Command
      */
     protected function registerHandler(string $name)
     {
-        $path = "api/Application/{$name}/Store{$name}";
+        $path = config('crud-generator.path.dir', 'api') . "/Application/{$name}/Store{$name}";
 
         $this->makePath($path);
 
@@ -158,7 +158,7 @@ class ApiCrudGenerator extends Command
      */
     protected function update(string $name)
     {
-        $path = "api/Application/{$name}/Update{$name}";
+        $path = config('crud-generator.path.dir', 'api') . "/Application/{$name}/Update{$name}";
 
         $this->makePath($path);
 
@@ -170,7 +170,7 @@ class ApiCrudGenerator extends Command
      */
     protected function updateHandler(string $name)
     {
-        $path = "api/Application/{$name}/Update{$name}";
+        $path = config('crud-generator.path.dir', 'api') . "/Application/{$name}/Update{$name}";
 
         $this->makePath($path);
 
@@ -182,7 +182,7 @@ class ApiCrudGenerator extends Command
      */
     protected function getList(string $name)
     {
-        $path = "api/Application/{$name}/Get{$name}List";
+        $path = config('crud-generator.path.dir', 'api') . "/Application/{$name}/Get{$name}List";
 
         $this->makePath($path);
 
@@ -194,7 +194,7 @@ class ApiCrudGenerator extends Command
      */
     protected function getListHandler(string $name)
     {
-        $path = "api/Application/{$name}/Get{$name}List";
+        $path = config('crud-generator.path.dir', 'api') . "/Application/{$name}/Get{$name}List";
 
         $this->makePath($path);
 
@@ -206,7 +206,7 @@ class ApiCrudGenerator extends Command
      */
     protected function eloquentRepository(string $name)
     {
-        $path = "api/Infrastructure/Eloquent";
+        $path = config('crud-generator.path.dir', 'api') . "/Infrastructure/Eloquent";
 
         $this->makePath($path);
 
@@ -218,7 +218,7 @@ class ApiCrudGenerator extends Command
      */
     protected function controller(string $name)
     {
-        $path = "api/Http/Controllers";
+        $path = config('crud-generator.path.dir', 'api') . "/Http/Controllers";
 
         $this->makePath($path);
 
@@ -230,7 +230,7 @@ class ApiCrudGenerator extends Command
      */
     protected function request(string $name)
     {
-        $path = "api/Http/Requests/{$name}";
+        $path = config('crud-generator.path.dir', 'api') . "/Http/Requests/{$name}";
 
         $this->makePath($path);
 
@@ -256,7 +256,7 @@ class ApiCrudGenerator extends Command
      */
     protected function resource(string $name)
     {
-        $path = "api/Http/Resources/{$name}";
+        $path = config('crud-generator.path.dir', 'api') . "/Http/Resources/{$name}";
 
         $this->makePath($path);
 
@@ -268,7 +268,7 @@ class ApiCrudGenerator extends Command
      */
     protected function resourceCollection(string $name)
     {
-        $path = "api/Http/Resources/{$name}";
+        $path = config('crud-generator.path.dir', 'api') . "/Http/Resources/{$name}";
 
         $this->makePath($path);
 
@@ -319,7 +319,9 @@ class ApiCrudGenerator extends Command
      */
     protected function getStub($type)
     {
-        return file_get_contents(__DIR__ . "/../stubs/$type.stub");
+        return file_get_contents(
+            trim(config('crud-generator.path.stubs', __DIR__ . '/../stubs'), '/') . "/$type.stub"
+        );
     }
 
     /**
@@ -345,7 +347,6 @@ class ApiCrudGenerator extends Command
                 '{{modelName}}',
                 '{{modelNameSingularLowerCaseFirst}}',
                 '{{modelNamePluralLowerCase}}',
-                '{{modelNameSingularLowerCase}}',
                 '{{modelNamePluralLowerCaseUnderscore}}',
                 '{{modelNamePlural}}',
                 '{{modelNamePluralLowerCaseHyphen}}',
@@ -354,7 +355,6 @@ class ApiCrudGenerator extends Command
                 $name,
                 StringHelper::camelCase($name),
                 StringHelper::camelCase(Str::plural($name)),
-                StringHelper::camelCase($name),
                 StringHelper::toUnderscore(Str::plural($name)),
                 Str::plural($name),
                 StringHelper::toHyphen(Str::plural($name)),

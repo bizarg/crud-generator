@@ -47,45 +47,45 @@ class {{modelName}}Controller extends Controller
      */
     public function store(Store{{modelName}}Request $request): JsonResponse
     {
-        ${{modelNameSingularLowerCase}} = $this->dispatchCommand(Store{{modelName}}::fromRequest($request));
+        ${{modelNameSingularLowerCaseFirst}} = $this->dispatchCommand(Store{{modelName}}::fromRequest($request));
 
         return new JsonResponse([
-            'data' => new {{modelName}}Resource(${{modelNameSingularLowerCase}})
+            'data' => new {{modelName}}Resource(${{modelNameSingularLowerCaseFirst}})
         ], Response::HTTP_CREATED);
     }
 
     /**
      * @param Update{{modelName}}Request $request
-     * @param {{modelName}} ${{modelNameSingularLowerCase}}
+     * @param {{modelName}} ${{modelNameSingularLowerCaseFirst}}
      * @return JsonResponse
      */
-    public function update(Update{{modelName}}Request $request, {{modelName}} ${{modelNameSingularLowerCase}}): JsonResponse
+    public function update(Update{{modelName}}Request $request, {{modelName}} ${{modelNameSingularLowerCaseFirst}}): JsonResponse
     {
-        ${{modelNameSingularLowerCase}} = $this->dispatchCommand(Update{{modelName}}::fromRequest($request, ${{modelNameSingularLowerCase}}));
+        ${{modelNameSingularLowerCaseFirst}} = $this->dispatchCommand(Update{{modelName}}::fromRequest($request, ${{modelNameSingularLowerCaseFirst}}));
 
         return new JsonResponse([
-            'data' => new {{modelName}}Resource(${{modelNameSingularLowerCase}})
+            'data' => new {{modelName}}Resource(${{modelNameSingularLowerCaseFirst}})
         ]);
     }
 
     /**
-     * @param {{modelName}} ${{modelNameSingularLowerCase}}
+     * @param {{modelName}} ${{modelNameSingularLowerCaseFirst}}
      * @return JsonResponse
      */
-    public function show({{modelName}} ${{modelNameSingularLowerCase}}): JsonResponse
+    public function show({{modelName}} ${{modelNameSingularLowerCaseFirst}}): JsonResponse
     {
         return new JsonResponse([
-            'data' => new {{modelName}}Resource(${{modelNameSingularLowerCase}})
+            'data' => new {{modelName}}Resource(${{modelNameSingularLowerCaseFirst}})
         ]);
     }
 
     /**
-     * @param {{modelName}} ${{modelNameSingularLowerCase}}
+     * @param {{modelName}} ${{modelNameSingularLowerCaseFirst}}
      * @return JsonResponse
      */
-    public function destroy({{modelName}} ${{modelNameSingularLowerCase}}): JsonResponse
+    public function destroy({{modelName}} ${{modelNameSingularLowerCaseFirst}}): JsonResponse
     {
-        $this->dispatchCommand(new Delete{{modelName}}(${{modelNameSingularLowerCase}}));
+        $this->dispatchCommand(new Delete{{modelName}}(${{modelNameSingularLowerCaseFirst}}));
 
         return new JsonResponse(null, Response::HTTP_NO_CONTENT);
     }
