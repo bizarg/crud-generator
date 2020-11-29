@@ -20,17 +20,15 @@ class CrudServiceProvider extends ServiceProvider
                 ApiCrudGenerator::class,
             ]);
         }
-        if (method_exists($this, 'loadViewsFrom')) {
-            $this->loadViewsFrom(__DIR__ . '/stubs', 'crud-generator');
-        }
+
 
         if (method_exists($this, 'publishes')) {
             $this->publishes([
-                __DIR__ . '/stubs' => base_path('/resources/stubs'),
-            ], 'views');
+                __DIR__ . '/../stubs' => base_path('/resources/stubs'),
+            ], 'crud-generator-stubs');
             $this->publishes([
-                __DIR__ . '/config/crud-generator.php' => $this->configPath('crud-generator.php'),
-            ]);
+                __DIR__ . '/../config/crud-generator.php' => $this->configPath('crud-generator.php'),
+            ], 'crud-generator-config');
         }
     }
 
