@@ -320,7 +320,7 @@ class ApiCrudGenerator extends Command
     protected function getStub($type)
     {
         return file_get_contents(
-            trim(config('crud-generator.path.stubs', __DIR__ . '/../stubs'), '/') . "/$type.stub"
+            rtrim(config('crud-generator.path.stubs', __DIR__ . '/../stubs'), '/') . "/$type.stub"
         );
     }
 
