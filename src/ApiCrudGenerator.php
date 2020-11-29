@@ -2,8 +2,7 @@
 
 namespace Bizarg\Crud;
 
-use Api\Infrastructure\UseCase\StringCase as StringHelper;
-//use Bizarg\StringHelper;
+use Bizarg\StringHelper;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
