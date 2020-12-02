@@ -8,24 +8,48 @@ config/app.php
     ]
 ];
 ```
-template property example UserProjectTest:
+template property example CrudGenerate:
 
-    {{modelName}} - UserProjectTest
-    {{modelNameSingularLowerCaseFirst}} - userProjectTest
-    {{modelNamePluralLowerCase}} - userProjectTests
-    {{modelNamePluralLowerCaseUnderscore}} - user_project_tests
-    {{modelNamePlural}} - UserProjectTests
-    {{modelNamePluralLowerCaseHyphen}} -  user-project-tests
+     'Api', - {{namespace}} 
+     'CrudGenerate', - {{modelName}} 
+     'crudGenerate', - {{modelNameSingularLowerCaseFirst}}
+     'crudGenerates', - {{modelNamePluralLowerCase}} 
+     'crud_generates', - {{modelNamePluralLowerCaseUnderscore}} 
+     'CrudGenerates', - {{modelNamePlural}} 
+     'crud-generates', - {{modelNamePluralLowerCaseHyphen}} 
+     'Api\Domain', - {{domainPath}} 
+     'Api\Application', - {{commandPath}}
+     'Api\Http\Resources', - {{resourcePath}}
+     'Api\Http\Requests', - {{requestPath}}
+     'Api\Http\Controllers', - {{controllerPath}} 
+     'Api\Infrastructure\Eloquent', - {{repositoryPath}} 
+     'Tests\Feature', - {{testPath}} 
+     'Eloquent', - {{repositoryFilePrefix}}
 
 config:
 ```PHP
 <?php
-    return [
-        'path' => [
-            'dir' => 'api',
-            'stubs' => null, //resources/stubs
-        ]
-    ];     
+return [
+    'namespace' => 'api',
+    'path' => [
+        'domain' => 'Domain',
+        'command' => 'Application',
+        'repository' => 'Infrastructure/Eloquent',
+        'controller' => 'Http/Controllers',
+        'request' => 'Http/Requests',
+        'resource' => 'Http/Resources',
+        'migrate' => 'database/migrations',
+        'test' => 'tests/Feature',
+        'doc' => 'api-doc',
+        'stub' => null,
+        ''
+    ],
+    'repositoryFilePrefix' => 'Eloquent',
+    'generate' => [
+        'collection' => true
+    ],
+    'declare' => true
+]; 
 ```             
 
 php artisan vendor:bublish --tag=crud-generator-config

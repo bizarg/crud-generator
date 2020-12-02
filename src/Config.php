@@ -1,6 +1,6 @@
 <?php
 
-namespace Bizarg\crud\src;
+namespace Bizarg\Crud;
 
 /**
  * Class Config

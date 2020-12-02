@@ -1,5 +1,21 @@
 <?php
 
+                '{{namespace}}',
+                '{{modelName}}',
+                '{{modelNameSingularLowerCaseFirst}}',
+                '{{modelNamePluralLowerCase}}',
+                '{{modelNamePluralLowerCaseUnderscore}}',
+                '{{modelNamePlural}}',
+                '{{modelNamePluralLowerCaseHyphen}}',
+                '{{domainPath}}',
+                '{{commandPath}}',
+                '{{resourcePath}}',
+                '{{requestPath}}',
+                '{{controllerPath}}',
+                '{{repositoryPath}}',
+                '{{testPath}}',
+                '{{repositoryFilePrefix}}',
+
 // @codingStandardsIgnoreStart
 
 /**
