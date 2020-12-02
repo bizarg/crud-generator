@@ -1,11 +1,11 @@
 
-namespace {{namespace}}\Http\Requests\{{modelName}};
+namespace {{requestPath}}\{{modelName}};
 
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
  * Class {{modelName}}Request
- * @package {{namespace}}\Http\Requests\{{modelName}}
+ * @package {{requestPath}}\{{modelName}}
  */
 class Update{{modelName}}Request extends FormRequest
 {

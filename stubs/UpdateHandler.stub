@@ -1,14 +1,14 @@
 
-namespace {{namespace}}\Application\{{modelName}}\Update{{modelName}};
+namespace {{commandPath}}\{{modelName}}\Update{{modelName}};
 
-use {{namespace}}\Domain\{{modelName}}\{{modelName}};
-use {{namespace}}\Domain\{{modelName}}\{{modelName}}Repository;
+use {{domainPath}}\{{modelName}}\{{modelName}};
+use {{domainPath}}\{{modelName}}\{{modelName}}Repository;
 use ItDevgroup\CommandBus\Command;
 use ItDevgroup\CommandBus\Handler;
 
 /**
  * Class Update{{modelName}}Handler
- * @package {{namespace}}\Application\{{modelName}}\Update{{modelName}}
+ * @package {{commandPath}}\{{modelName}}\Update{{modelName}}
  */
 class Update{{modelName}}Handler implements Handler
 {

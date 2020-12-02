@@ -1,11 +1,11 @@
 
-namespace {{namespace}}\Domain\{{modelName}};
+namespace {{domainPath}}\{{modelName}};
 
-use {{namespace}}\Domain\Core\EntityNotFound;
+use {{domainPath}}\Core\EntityNotFound;
 
 /**
  * Class {{modelName}}NotFound
- * @package {{namespace}}\Domain\{{modelName}}
+ * @package {{domainPath}}\{{modelName}}
  */
 class {{modelName}}NotFound extends EntityNotFound
 {

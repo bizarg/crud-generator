@@ -3,6 +3,7 @@
 namespace Bizarg\Crud;
 
 use Bizarg\StringHelper\StringHelper;
+use Bizarg\crud\src\Config;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
@@ -21,6 +22,20 @@ class ApiCrudGenerator extends Command
      * @var string
      */
     protected $description = 'Create CRUD operations';
+    /**
+     * @var Config
+     */
+    private Config $config;
+
+    /**
+     * ApiCrudGenerator constructor.
+     * @param Config $config
+     */
+    public function __construct(Config $config)
+    {
+        parent::__construct();
+        $this->config = $config;
+    }
 
     /**
      * @return void
@@ -50,16 +65,11 @@ class ApiCrudGenerator extends Command
         $this->migrate($name);
         $this->apiDoc($name);
 
-        if (config('crud-generator.generate.collection', true)) {
+        if ($this->config->needGenerateCollection()) {
             $this->collection($name);
         }
 
-
-        file_put_contents(
-            base_path('routes/api.php'),
-            '//Route::apiResource(\'' . Str::plural(strtolower($name)) . "', '{$name}Controller');",
-            FILE_APPEND
-        );
+        $this->route($name);
     }
 
     /**
@@ -67,7 +77,7 @@ class ApiCrudGenerator extends Command
      */
     protected function model(string $name)
     {
-        $path = config('crud-generator.path.dir', 'api') . "/Domain/{$name}";
+        $path = $this->config->domainPath() . $name;
 
         $this->makePath($path);
 
@@ -79,7 +89,7 @@ class ApiCrudGenerator extends Command
      */
     protected function filter(string $name)
     {
-        $path = config('crud-generator.path.dir', 'api') . "/Domain/{$name}";
+        $path = $this->config->domainPath() . $name;
 
         $this->makePath($path);
 
@@ -91,7 +101,7 @@ class ApiCrudGenerator extends Command
      */
     protected function notFound(string $name)
     {
-        $path = config('crud-generator.path.dir', 'api') . "/Domain/{$name}";
+        $path = $this->config->domainPath() . $name;
 
         $this->makePath($path);
 
@@ -103,7 +113,7 @@ class ApiCrudGenerator extends Command
      */
     protected function repository(string $name)
     {
-        $path = config('crud-generator.path.dir', 'api') . "/Domain/{$name}";
+        $path = $this->config->domainPath() . $name;
 
         $this->makePath($path);
 
@@ -115,7 +125,7 @@ class ApiCrudGenerator extends Command
      */
     protected function delete(string $name)
     {
-        $path = config('crud-generator.path.dir', 'api') . "/Application/{$name}/Delete{$name}";
+        $path = $this->config->commandPath() . "{$name}/Delete{$name}";
 
         $this->makePath($path);
 
@@ -127,7 +137,7 @@ class ApiCrudGenerator extends Command
      */
     protected function deleteHandler(string $name)
     {
-        $path = config('crud-generator.path.dir', 'api') . "/Application/{$name}/Delete{$name}";
+        $path = $this->config->commandPath() . "{$name}/Delete{$name}";
 
         $this->makePath($path);
 
@@ -139,7 +149,7 @@ class ApiCrudGenerator extends Command
      */
     protected function register(string $name)
     {
-        $path = config('crud-generator.path.dir', 'api') . "/Application/{$name}/Store{$name}";
+        $path = $this->config->commandPath() . "{$name}/Store{$name}";
 
         $this->makePath($path);
 
@@ -151,7 +161,7 @@ class ApiCrudGenerator extends Command
      */
     protected function registerHandler(string $name)
     {
-        $path = config('crud-generator.path.dir', 'api') . "/Application/{$name}/Store{$name}";
+        $path = $this->config->commandPath() . "{$name}/Store{$name}";
 
         $this->makePath($path);
 
@@ -163,7 +173,7 @@ class ApiCrudGenerator extends Command
      */
     protected function update(string $name)
     {
-        $path = config('crud-generator.path.dir', 'api') . "/Application/{$name}/Update{$name}";
+        $path = $this->config->commandPath() . "{$name}/Update{$name}";
 
         $this->makePath($path);
 
@@ -175,7 +185,7 @@ class ApiCrudGenerator extends Command
      */
     protected function updateHandler(string $name)
     {
-        $path = config('crud-generator.path.dir', 'api') . "/Application/{$name}/Update{$name}";
+        $path = $this->config->commandPath() . "{$name}/Update{$name}";
 
         $this->makePath($path);
 
@@ -187,7 +197,7 @@ class ApiCrudGenerator extends Command
      */
     protected function getList(string $name)
     {
-        $path = config('crud-generator.path.dir', 'api') . "/Application/{$name}/Get{$name}List";
+        $path = $this->config->commandPath() . "{$name}/Get{$name}List";
 
         $this->makePath($path);
 
@@ -199,7 +209,7 @@ class ApiCrudGenerator extends Command
      */
     protected function getListHandler(string $name)
     {
-        $path = config('crud-generator.path.dir', 'api') . "/Application/{$name}/Get{$name}List";
+        $path = $this->config->commandPath() . "{$name}/Get{$name}List";
 
         $this->makePath($path);
 
@@ -211,11 +221,11 @@ class ApiCrudGenerator extends Command
      */
     protected function eloquentRepository(string $name)
     {
-        $path = config('crud-generator.path.dir', 'api') . "/Infrastructure/Eloquent";
+        $path = $this->config->repositoryPath();
 
         $this->makePath($path);
 
-        $this->put($path . "/Eloquent{$name}Repository.php", 'EloquentRepository');
+        $this->put($path . "{$this->config->repositoryFilePrefix()}{$name}Repository.php", 'EloquentRepository');
     }
 
     /**
@@ -223,11 +233,11 @@ class ApiCrudGenerator extends Command
      */
     protected function controller(string $name)
     {
-        $path = config('crud-generator.path.dir', 'api') . "/Http/Controllers";
+        $path = $this->config->controllerPath();
 
         $this->makePath($path);
 
-        $this->put($path . "/{$name}Controller.php", 'Controller');
+        $this->put($path . "{$name}Controller.php", 'Controller');
     }
 
     /**
@@ -235,7 +245,7 @@ class ApiCrudGenerator extends Command
      */
     protected function request(string $name)
     {
-        $path = config('crud-generator.path.dir', 'api') . "/Http/Requests/{$name}";
+        $path = $this->config->requestPath() . $name;
 
         $this->makePath($path);
 
@@ -249,11 +259,11 @@ class ApiCrudGenerator extends Command
      */
     protected function test(string $name)
     {
-        $path = 'tests/Feature';
+        $path = $this->config->testPath();
 
         $this->makePath($path);
 
-        $this->put($path . "/{$name}Test.php", 'Test');
+        $this->put($path . "{$name}Test.php", 'Test');
     }
 
     /**
@@ -261,7 +271,7 @@ class ApiCrudGenerator extends Command
      */
     protected function resource(string $name)
     {
-        $path = config('crud-generator.path.dir', 'api') . "/Http/Resources/{$name}";
+        $path = $this->config->resourcePath() . $name;
 
         $this->makePath($path);
 
@@ -273,7 +283,7 @@ class ApiCrudGenerator extends Command
      */
     protected function resourceCollection(string $name)
     {
-        $path = config('crud-generator.path.dir', 'api') . "/Http/Resources/{$name}";
+        $path = $this->config->resourcePath() . $name;
 
         $this->makePath($path);
 
@@ -286,14 +296,14 @@ class ApiCrudGenerator extends Command
      */
     protected function migrate(string $name): void
     {
-        $path = "database/migrations";
+        $path = $this->config->migratePath();
 
         $this->makePath($path);
 
         $filename = Carbon::now()->format('Y_m_d_His')
             . '_create_' . StringHelper::toUnderscore(Str::plural($name)) . '_table.php';
 
-        $this->put($path . "/" . $filename, 'Migrate');
+        $this->put($path . $filename, 'Migrate');
     }
 
     /**
@@ -301,11 +311,11 @@ class ApiCrudGenerator extends Command
      */
     protected function apiDoc(string $name)
     {
-        $path = 'api-doc';
+        $path = $this->config->docPath();
 
         $this->makePath($path);
 
-        $this->put($path . "/api-" . strtolower(StringHelper::toHyphen(Str::plural($name))) . ".php", 'ApiDoc');
+        $this->put($path . "api-" . strtolower(StringHelper::toHyphen(Str::plural($name))) . ".php", 'ApiDoc');
     }
 
     /**
@@ -313,7 +323,7 @@ class ApiCrudGenerator extends Command
      */
     protected function collection(string $name)
     {
-        $path = 'api-doc/collections';
+        $path = $this->config->docPath() . 'collections';
 
         $this->makePath($path);
 
@@ -365,6 +375,10 @@ class ApiCrudGenerator extends Command
             $string .= PHP_EOL . 'declare(strict_types=1);' . PHP_EOL;
         }
 
+        if ($template == 'ApiDoc' || $template == 'Collection') {
+            $string = '';
+        }
+
         $string .= str_replace(
             [
                 '{{namespace}}',
@@ -374,6 +388,14 @@ class ApiCrudGenerator extends Command
                 '{{modelNamePluralLowerCaseUnderscore}}',
                 '{{modelNamePlural}}',
                 '{{modelNamePluralLowerCaseHyphen}}',
+                '{{domainPath}}',
+                '{{commandPath}}',
+                '{{resourcePath}}',
+                '{{requestPath}}',
+                '{{controllerPath}}',
+                '{{repositoryPath}}',
+                '{{testPath}}',
+                '{{repositoryFilePrefix}}',
             ],
             [
                 ucfirst(config('crud-generator.path.dir', 'api')),
@@ -383,10 +405,47 @@ class ApiCrudGenerator extends Command
                 StringHelper::toUnderscore(Str::plural($name)),
                 Str::plural($name),
                 StringHelper::toHyphen(Str::plural($name)),
+                $this->preparePath($this->config->domainPath()),
+                $this->preparePath($this->config->commandPath()),
+                $this->preparePath($this->config->resourcePath()),
+                $this->preparePath($this->config->requestPath()),
+                $this->preparePath($this->config->controllerPath()),
+                $this->preparePath($this->config->repositoryPath()),
+                $this->preparePath($this->config->testPath()),
+                $this->config->repositoryFilePrefix()
             ],
             $this->getStub($template)
         );
 
         return $string;
+    }
+
+    public function preparePath($path)
+    {
+        return ucfirst(str_replace('/', '\\', trim($path, '/')));
+    }
+
+    /**
+     * @param string $name
+     */
+    protected function route(string $name)
+    {
+        $entity = StringHelper::camelCase($name);
+        $prefix = StringHelper::camelCase(Str::plural($name));
+
+        $route = "
+        //  Route::group(['prefix' => '{$prefix}', 'as' => '{$prefix}.'], function () {
+        //      Route::get('/', '{$name}Controller@index')->name('index');
+        //      Route::post('/', '{$name}Controller@store')->name('store');
+        //      Route::put('{{$entity}}', '{$name}Controller@update')->name('update')->where('{$entity}', '[0-9]+');
+        //      Route::get('{{$entity}}', '{$name}Controller@show')->name('show')->where('{$entity}', '[0-9]+');
+        //      Route::delete('{{$entity}}', '{$name}Controller@destroy')->name('delete')->where('{$entity}', '[0-9]+');
+        //  });";
+
+        file_put_contents(
+            base_path('routes/api.php'),
+            $route,
+            FILE_APPEND
+        );
     }
 }

@@ -1,10 +1,10 @@
 
 use Illuminate\Http\Response;
-use Tests\Feature\TestCase as BaseTestCase;
+use {{testPath}}\TestCase as BaseTestCase;
 
 /**
  * Class {{modelName}}Test
- * @package Tests\Feature
+ * @package {{testPath}}
  */
 class {{modelName}}Test extends BaseTestCase
 {

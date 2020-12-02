@@ -1,12 +1,12 @@
 
-namespace {{namespace}}\Http\Resources\{{modelName}};
+namespace {{resourcePath}}\{{modelName}};
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
  * Class {{modelName}}Resource
- * @package {{namespace}}\Http\Resources\{{modelName}}
+ * @package {{resourcePath}}\{{modelName}}
  */
 class {{modelName}}Resource extends JsonResource
 {

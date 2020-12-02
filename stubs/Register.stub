@@ -1,13 +1,13 @@
 
-namespace {{namespace}}\Application\{{modelName}}\Store{{modelName}};
+namespace {{commandPath}}\{{modelName}}\Store{{modelName}};
 
-use {{namespace}}\Http\Requests\{{modelName}}\Store{{modelName}}Request;
+use {{requestPath}}\{{modelName}}\Store{{modelName}}Request;
 use Illuminate\Http\Request;
 use ItDevgroup\CommandBus\Command;
 
 /**
  * Class Store{{modelName}}
- * @package {{namespace}}\Application\{{modelName}}
+ * @package {{commandPath}}\{{modelName}}
  */
 class Store{{modelName}} implements Command
 {

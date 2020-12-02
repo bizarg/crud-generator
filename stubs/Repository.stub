@@ -1,11 +1,11 @@
 
-namespace {{namespace}}\Domain\{{modelName}};
+namespace {{domainPath}}\{{modelName}};
 
-use {{namespace}}\Domain\Core\InterfaceRepository;
+use {{domainPath}}\Core\InterfaceRepository;
 
 /**
  * Interface {{modelName}}Repository
- * @package {{namespace}}\Domain\{{modelName}}
+ * @package {{domainPath}}\{{modelName}}
  */
 interface {{modelName}}Repository extends InterfaceRepository
 {

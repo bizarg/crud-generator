@@ -1,14 +1,14 @@
 
-namespace {{namespace}}\Application\{{modelName}}\Update{{modelName}};
+namespace {{commandPath}}\{{modelName}}\Update{{modelName}};
 
-use {{namespace}}\Domain\{{modelName}}\{{modelName}};
-use {{namespace}}\Http\Requests\{{modelName}}\Update{{modelName}}Request;
+use {{domainPath}}\{{modelName}}\{{modelName}};
+use {{requestPath}}\{{modelName}}\Update{{modelName}}Request;
 use Illuminate\Http\Request;
 use ItDevgroup\CommandBus\Command;
 
 /**
  * Class Update{{modelName}}
- * @package {{namespace}}\Application\{{modelName}}\Update{{modelName}}
+ * @package {{commandPath}}\{{modelName}}\Update{{modelName}}
  */
 class Update{{modelName}} implements Command
 {

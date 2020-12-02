@@ -1,10 +1,10 @@
 
 namespace {{namespace}}\Infrastructure\Eloquent;
 
-use {{namespace}}\Domain\Core\Filter;
-use {{namespace}}\Domain\{{modelName}}\{{modelName}};
-use {{namespace}}\Domain\{{modelName}}\{{modelName}}Filter;
-use {{namespace}}\Domain\{{modelName}}\{{modelName}}Repository;
+use {{domainPath}}\Core\Filter;
+use {{domainPath}}\{{modelName}}\{{modelName}};
+use {{domainPath}}\{{modelName}}\{{modelName}}Filter;
+use {{domainPath}}\{{modelName}}\{{modelName}}Repository;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\DB;
@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
  * Class Eloquent{{modelName}}Repository
  * @package {{namespace}}\Infrastructure\Eloquent
  */
-class Eloquent{{modelName}}Repository extends AbstractEloquentRepository implements {{modelName}}Repository
+class {{repositoryFilePrefix}}{{modelName}}Repository extends AbstractEloquentRepository implements {{modelName}}Repository
 {
     /**
      * @var string

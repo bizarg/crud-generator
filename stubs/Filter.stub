@@ -1,12 +1,12 @@
 
-namespace {{namespace}}\Domain\{{modelName}};
+namespace {{domainPath}}\{{modelName}};
 
-use {{namespace}}\Domain\Core\Filter;
+use {{domainPath}}\Core\Filter;
 use Illuminate\Http\Request;
 
 /**
  * Class {{modelName}}Filter
- * @package {{namespace}}\Domain\{{modelName}}
+ * @package {{domainPath}}\{{modelName}}
  */
 class {{modelName}}Filter implements Filter
 {

@@ -1,14 +1,14 @@
 
-namespace {{namespace}}\Application\{{modelName}}\Store{{modelName}};
+namespace {{commandPath}}\{{modelName}}\Store{{modelName}};
 
-use {{namespace}}\Domain\{{modelName}}\{{modelName}};
-use {{namespace}}\Domain\{{modelName}}\{{modelName}}Repository;
+use {{domainPath}}\{{modelName}}\{{modelName}};
+use {{domainPath}}\{{modelName}}\{{modelName}}Repository;
 use ItDevgroup\CommandBus\Command;
 use ItDevgroup\CommandBus\Handler;
 
 /**
  * Class Store{{modelName}}Handler
- * @package {{namespace}}\Application\{{modelName}}
+ * @package {{commandPath}}\{{modelName}}
  */
 class Store{{modelName}}Handler implements Handler
 {

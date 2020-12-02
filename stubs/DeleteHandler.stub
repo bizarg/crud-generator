@@ -1,13 +1,13 @@
 
-namespace {{namespace}}\Application\{{modelName}}\Delete{{modelName}};
+namespace {{commandPath}}\{{modelName}}\Delete{{modelName}};
 
-use {{namespace}}\Domain\{{modelName}}\{{modelName}}Repository;
+use {{domainPath}}\{{modelName}}\{{modelName}}Repository;
 use ItDevgroup\CommandBus\Command;
 use ItDevgroup\CommandBus\Handler;
 
 /**
  * Class Delete{{modelName}}Handler
- * @package {{namespace}}\Application\{{modelName}}
+ * @package {{commandPath}}\{{modelName}}
  */
 class Delete{{modelName}}Handler implements Handler
 {

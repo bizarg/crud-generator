@@ -1,13 +1,13 @@
 
-namespace {{namespace}}\Application\{{modelName}}\Get{{modelName}}List;
+namespace {{commandPath}}\{{modelName}}\Get{{modelName}}List;
 
-use {{namespace}}\Domain\{{modelName}}\{{modelName}}Repository;
+use {{domainPath}}\{{modelName}}\{{modelName}}Repository;
 use ItDevgroup\CommandBus\Command;
 use ItDevgroup\CommandBus\Handler;
 
 /**
  * Class Get{{modelName}}ListHandler
- * @package {{namespace}}\Application\{{modelName}}\Get{{modelName}}List
+ * @package {{commandPath}}\{{modelName}}\Get{{modelName}}List
  */
 class Get{{modelName}}ListHandler implements Handler
 {

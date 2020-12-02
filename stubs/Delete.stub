@@ -1,12 +1,12 @@
 
-namespace {{namespace}}\Application\{{modelName}}\Delete{{modelName}};
+namespace {{commandPath}}\{{modelName}}\Delete{{modelName}};
 
-use {{namespace}}\Domain\{{modelName}}\{{modelName}};
+use {{domainPath}}\{{modelName}}\{{modelName}};
 use ItDevgroup\CommandBus\Command;
 
 /**
  * Class Delete{{modelName}}
- * @package {{namespace}}\Application\{{modelName}}
+ * @package {{commandPath}}\{{modelName}}
  */
 class Delete{{modelName}} implements Command
 {

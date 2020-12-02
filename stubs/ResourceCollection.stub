@@ -1,11 +1,11 @@
 
-namespace {{namespace}}\Http\Resources\{{modelName}};
+namespace {{resourcePath}}\{{modelName}};
 
-use {{namespace}}\Http\Resources\ResourceCollectionWithStandardResponse;
+use {{resourcePath}}\ResourceCollectionWithStandardResponse;
 
 /**
  * Class {{modelName}}ResourceCollection
- * @package {{namespace}}\Http\Resources\{{modelName}}
+ * @package {{resourcePath}}\{{modelName}}
  */
 class {{modelName}}ResourceCollection extends ResourceCollectionWithStandardResponse
 {
