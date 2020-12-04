@@ -1,7 +1,7 @@
 
 namespace {{commandPath}}\{{modelName}}\Get{{modelName}}List;
 
-use {{domainPath}}\{{modelName}}\{{modelName}}Repository;
+use {{repositoryPath}}\{{modelName}}\{{modelName}}Repository;
 use ItDevgroup\CommandBus\Command;
 use ItDevgroup\CommandBus\Handler;
 

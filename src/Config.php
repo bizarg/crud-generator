@@ -130,15 +130,14 @@ class Config
      */
     public function needDeclare(): bool
     {
-        return $this->config['path']['declare'];
+        return $this->config['declare'];
     }
 
     /**
-     * @param $namespace
-     * @param $path
+     * @param string $path
      * @return string
      */
-    protected function pathWithNamespace($path)
+    public function pathWithNamespace($path)
     {
         return $this->trimSlash($this->namespace()) . $this->trimSlash($path);
     }

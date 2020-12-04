@@ -2,7 +2,8 @@
 
 namespace Bizarg\Crud;
 
-use Bizarg\StringHelper\StringHelper;
+use Api\Infrastructure\UseCase\StringCase as StringHelper;
+//use Bizarg\StringHelper\StringHelper;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
@@ -41,7 +42,7 @@ class ApiCrudGenerator extends Command
      */
     public function handle(): void
     {
-        $name = $this->argument('name');
+        $name = StringHelper::upperCaseCamelCase($this->argument('name'));
 
         $this->model($name);
         $this->filter($name);
@@ -331,12 +332,15 @@ class ApiCrudGenerator extends Command
 
     /**
      * @param string $path
+     * @return string
      */
-    protected function makePath(string $path)
+    protected function makePath(string $path): string
     {
         if (!file_exists($path = base_path($path))) {
             mkdir($path, 0777, true);
         }
+
+        return $path;
     }
 
     /**
@@ -345,9 +349,7 @@ class ApiCrudGenerator extends Command
      */
     protected function getStub($type)
     {
-        return file_get_contents(
-            rtrim(config('crud-generator.path.stubs') ?? __DIR__ . '/../stubs', '/') . "/$type.stub"
-        );
+        return file_get_contents($this->config->stubPath() . "$type.stub");
     }
 
     /**
@@ -370,7 +372,7 @@ class ApiCrudGenerator extends Command
 
         $string = '<?php' . PHP_EOL;
 
-        if (config('crud-generator.declare', true)) {
+        if ($this->config->needDeclare()) {
             $string .= PHP_EOL . 'declare(strict_types=1);' . PHP_EOL;
         }
 
@@ -397,7 +399,7 @@ class ApiCrudGenerator extends Command
                 '{{repositoryFilePrefix}}',
             ],
             [
-                ucfirst(config('crud-generator.path.dir', 'api')),
+                ucfirst($this->config->namespace()),
                 $name,
                 StringHelper::camelCase($name),
                 StringHelper::camelCase(Str::plural($name)),
@@ -419,7 +421,11 @@ class ApiCrudGenerator extends Command
         return $string;
     }
 
-    public function preparePath($path)
+    /**
+     * @param string $path
+     * @return string
+     */
+    public function preparePath($path): string
     {
         return ucfirst(str_replace('/', '\\', trim($path, '/')));
     }
@@ -429,16 +435,16 @@ class ApiCrudGenerator extends Command
      */
     protected function route(string $name)
     {
-        $entity = StringHelper::camelCase($name);
-        $prefix = StringHelper::camelCase(Str::plural($name));
+        $as = StringHelper::camelCase($name);
+        $prefix = StringHelper::toHyphen(Str::plural($name));
 
         $route = "
-        //  Route::group(['prefix' => '{$prefix}', 'as' => '{$prefix}.'], function () {
+        //  Route::group(['prefix' => '{$prefix}', 'as' => '{$as}.'], function () {
         //      Route::get('/', '{$name}Controller@index')->name('index');
         //      Route::post('/', '{$name}Controller@store')->name('store');
-        //      Route::put('{{$entity}}', '{$name}Controller@update')->name('update')->where('{$entity}', '[0-9]+');
-        //      Route::get('{{$entity}}', '{$name}Controller@show')->name('show')->where('{$entity}', '[0-9]+');
-        //      Route::delete('{{$entity}}', '{$name}Controller@destroy')->name('delete')->where('{$entity}', '[0-9]+');
+        //      Route::put('{{$as}}', '{$name}Controller@update')->name('update')->where('{$as}', '[0-9]+');
+        //      Route::get('{{$as}}', '{$name}Controller@show')->name('show')->where('{$as}', '[0-9]+');
+        //      Route::delete('{{$as}}', '{$name}Controller@destroy')->name('delete')->where('{$as}', '[0-9]+');
         //  });";
 
         file_put_contents(
