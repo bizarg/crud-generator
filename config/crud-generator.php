@@ -2,7 +2,7 @@
 
 return [
     'namespace' => 'api',
-    'path' => [
+    'paths' => [
         'domain' => 'Domain',
         'command' => 'Application',
         'repository' => 'Infrastructure/Eloquent',
@@ -13,7 +13,6 @@ return [
         'test' => 'tests/Feature',
         'doc' => 'api-doc',
         'stub' => null,
-        ''
     ],
     'repositoryFilePrefix' => 'Eloquent',
     'generate' => [

@@ -34,7 +34,7 @@ class Config
      */
     public function domainPath(): string
     {
-        return $this->pathWithNamespace($this->config['path']['domain']);
+        return $this->pathWithNamespace($this->config['paths']['domain']);
     }
 
     /**
@@ -42,7 +42,7 @@ class Config
      */
     public function commandPath(): string
     {
-        return $this->pathWithNamespace($this->config['path']['command']);
+        return $this->pathWithNamespace($this->config['paths']['command']);
     }
 
     /**
@@ -50,7 +50,7 @@ class Config
      */
     public function repositoryPath(): string
     {
-        return $this->pathWithNamespace($this->config['path']['repository']);
+        return $this->pathWithNamespace($this->config['paths']['repository']);
     }
 
     /**
@@ -58,7 +58,7 @@ class Config
      */
     public function controllerPath(): string
     {
-        return $this->pathWithNamespace($this->config['path']['controller']);
+        return $this->pathWithNamespace($this->config['paths']['controller']);
     }
 
     /**
@@ -66,7 +66,7 @@ class Config
      */
     public function requestPath(): string
     {
-        return $this->pathWithNamespace($this->config['path']['request']);
+        return $this->pathWithNamespace($this->config['paths']['request']);
     }
 
     /**
@@ -74,7 +74,7 @@ class Config
      */
     public function resourcePath(): string
     {
-        return $this->pathWithNamespace($this->config['path']['resource']);
+        return $this->pathWithNamespace($this->config['paths']['resource']);
     }
 
     /**
@@ -82,7 +82,7 @@ class Config
      */
     public function migratePath(): string
     {
-        return $this->trimSlash($this->config['path']['migrate']);
+        return $this->trimSlash($this->config['paths']['migrate']);
     }
 
     /**
@@ -90,7 +90,7 @@ class Config
      */
     public function testPath(): string
     {
-        return $this->trimSlash($this->config['path']['test']);
+        return $this->trimSlash($this->config['paths']['test']);
     }
 
     /**
@@ -98,7 +98,7 @@ class Config
      */
     public function docPath(): string
     {
-        return $this->trimSlash($this->config['path']['doc']);
+        return $this->trimSlash($this->config['paths']['doc']);
     }
 
     /**
@@ -106,7 +106,7 @@ class Config
      */
     public function stubPath(): string
     {
-        return $this->trimSlash($this->config['path']['stub']) ??  __DIR__ . '/../stubs/';
+        return $this->trimSlash($this->config['paths']['stub']) ??  __DIR__ . '/../stubs/';
     }
 
     /**
