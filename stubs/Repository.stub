@@ -1,12 +1,86 @@
 
 namespace {{domainPath}}\{{modelName}};
 
-use {{domainPath}}\Core\InterfaceRepository;
+use {{domainPath}}\Core\Order;
+use {{domainPath}}\Core\Pagination;
+use Exception;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 
 /**
  * Interface {{modelName}}Repository
  * @package {{domainPath}}\{{modelName}}
  */
-interface {{modelName}}Repository extends InterfaceRepository
+interface {{modelName}}Repository
 {
+    /**
+     * @param Pagination|null $pagination
+     * @return LengthAwarePaginator
+     */
+    public function pagination(Pagination $pagination): LengthAwarePaginator;
+
+    /**
+     * @return Collection
+     */
+    public function collection(): Collection;
+
+    /**
+     * @return {{modelName}}|null|Model
+     */
+    public function first(): ?{{modelName}};
+
+    /**
+     * @param int $id
+     * @return {{modelName}}|Model|null
+     */
+    public function byId(int $id): ?{{modelName}};
+
+    /**
+     * @param string $value
+     * @param string|null $key
+     * @return Collection
+     */
+    public function pluck(string $value, ?string $key = null): Collection;
+
+    /**
+     * @return int
+     */
+    public function count(): int;
+
+    /**
+     * @param {{modelName}} $model
+     */
+    public function store({{modelName}} $model): void;
+
+    /**
+     * @param {{modelName}} $model
+     * @throws Exception
+     */
+    public function delete({{modelName}} $model): void;
+
+    /**
+     * @param {{modelName}}Filter|null $filter
+     * @return self
+     */
+    public function setFilter(?{{modelName}}Filter $filter);
+
+    /**
+     * @param Order|null $order
+     * @return self
+     */
+    public function setOrder(?Order $order);
+
+    /**
+     * @param int $limit
+     * @return self
+     */
+    public function setLimit(int $limit);
+
+    /**
+     * @param string $value
+     * @param string|null $key
+     * @return bool
+     */
+    public function exists(string $value, ?string $key = null): bool;
 }

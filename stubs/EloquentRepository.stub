@@ -1,27 +1,55 @@
 
-namespace {{namespace}}\Infrastructure\Eloquent;
+namespace {{repositoryPath}};
 
 use {{domainPath}}\Core\Filter;
+use {{domainPath}}\Core\Order;
+use {{domainPath}}\Core\Pagination;
 use {{domainPath}}\{{modelName}}\{{modelName}};
 use {{domainPath}}\{{modelName}}\{{modelName}}Filter;
 use {{domainPath}}\{{modelName}}\{{modelName}}Repository;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Collection;
 
 /**
- * Class Eloquent{{modelName}}Repository
- * @package {{namespace}}\Infrastructure\Eloquent
+ * Class {{repositoryFilePrefix}}{{modelName}}Repository
+ * @package {{repositoryPath}}
  */
-class {{repositoryFilePrefix}}{{modelName}}Repository extends AbstractEloquentRepository implements {{modelName}}Repository
+class {{repositoryFilePrefix}}{{modelName}}Repository implements {{modelName}}Repository
 {
     /**
      * @var string
      */
-    protected string $table = '{{modelNamePluralLowerCaseUnderscore}}.';
+    protected $table = 'user_projects.';
+    /**
+     * @var {{modelName}}
+     */
+    protected {{modelName}} $model;
+    /**
+     * @var Application
+     */
+    protected Application $app;
+    /**
+     * @var Builder
+     */
+    protected Builder $builder;
+    /**
+     * @var {{modelName}}Filter|null
+     */
+    protected ?{{modelName}}Filter $filter = null;
+    /**
+     * @var Order|null
+     */
+    protected ?Order $order = null;
+    /**
+     * @var int|null
+     */
+    protected ?int $limit = null;
 
     /**
-     * Eloquent{{modelName}}Repository constructor.
+     * {{repositoryFilePrefix}}{{modelName}}Repository constructor.
      * @param {{modelName}} $model
      * @param Application $app
      */
@@ -34,10 +62,210 @@ class {{repositoryFilePrefix}}{{modelName}}Repository extends AbstractEloquentRe
     }
 
     /**
-     * @param Filter|{{modelName}}Filter $filter
+     * @inheritDoc
+     */
+    public function pagination(Pagination $pagination): LengthAwarePaginator
+    {
+        $this->builder = $this->model->newQuery();
+
+        $this->filterAndOrder();
+
+        return $this->builder->paginate($pagination->limit(), ['*'], 'page', $pagination->page());
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function collection(): Collection
+    {
+        $this->builder = $this->model->newQuery();
+
+        $this->filterAndOrder();
+
+        return $this->builder->get();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function pluck(string $value, ?string $key = null): Collection
+    {
+        $this->builder = $this->model->newQuery();
+
+        $this->filterAndOrder();
+
+        return $this->builder->pluck($value, $key);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function exists(string $value, ?string $key = null): bool
+    {
+        $this->builder = $this->model->newQuery();
+
+        $this->filterAndOrder();
+
+        return $this->builder->exists();
+    }
+
+    /**
+     * @param int $id
+     * @return {{modelName}}|Builder|Builder[]|\Illuminate\Database\Eloquent\Collection|Model|null
+     */
+    public function byId(int $id): ?{{modelName}}
+    {
+        return $this->model->newQuery()->find($id);
+    }
+
+    /**
+     * @return {{modelName}}|Builder|Model|object|null
+     */
+    public function first(): ?{{modelName}}
+    {
+        $this->builder = $this->model->newQuery();
+
+        $this->filterAndOrder();
+
+        return $this->builder->first();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function count(): int
+    {
+        $this->builder = $this->model->newQuery();
+
+        $this->filterAndOrder();
+
+        return $this->builder->count();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function store({{modelName}} $model): void
+    {
+        $this->model = $model;
+        $this->model->save();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function delete({{modelName}} $model): void
+    {
+        $this->model = $model;
+        $this->model->delete();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setFilter(?{{modelName}}Filter $filter): self
+    {
+        $this->filter = $filter;
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setOrder(?Order $order): self
+    {
+        $this->order = $order;
+        return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function setLimit(int $limit): self
+    {
+        $this->limit = $limit;
+        return $this;
+    }
+
+    /**
      * @return void
      */
-    protected function filter(Filter $filter): void
+    protected function filterAndOrder(): void
+    {
+        if ($this->filter) {
+            $this->filter($this->filter);
+        }
+
+        if ($this->order) {
+            $this->sort($this->order);
+        }
+
+        if ($this->limit) {
+            $this->limit($this->limit);
+        }
+
+        $this->reset();
+    }
+
+    /**
+     * @param string $table
+     * @return bool
+     */
+    protected function hasJoin(string $table): bool
+    {
+        $joins = $this->builder->getQuery()->joins;
+
+        if ($joins == null) {
+            return false;
+        }
+
+        foreach ($joins as $join) {
+            if ($join->table == $table) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @return void
+     */
+    protected function reset(): void
+    {
+        $this->filter = null;
+        $this->order = null;
+    }
+
+    /**
+     * @param int $limit
+     * @return void
+     */
+    protected function limit(int $limit): void
+    {
+        $this->builder->limit($limit);
+    }
+
+    /**
+     * @param Order|null $order
+     * @return void
+     */
+    protected function sort(?Order $order): void
+    {
+        $table = collect(explode('.', $order->field()))->first();
+
+        if ($this->table != $table . '.') {
+            $this->{'join' . ucfirst($table)}();
+        }
+
+        $this->builder->orderBy($order->field(), $order->direction());
+    }
+
+    /**
+     * @param Filter|{{modelName}} $filter
+     * @return void
+     */
+    protected function filter($filter): void
     {
         if ($filter->query()) {
             $this->builder->where(function (Builder $builder) use ($filter) {

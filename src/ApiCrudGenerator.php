@@ -41,7 +41,7 @@ class ApiCrudGenerator extends Command
      */
     public function handle(): void
     {
-        $name = StringHelper::upperCaseCamelCase($this->argument('name'));
+        $name = $this->argument('name');
 
         $this->model($name);
         $this->filter($name);

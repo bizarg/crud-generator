@@ -1,14 +1,13 @@
 
 namespace {{domainPath}}\{{modelName}};
 
-use {{domainPath}}\Core\Filter;
 use Illuminate\Http\Request;
 
 /**
  * Class {{modelName}}Filter
  * @package {{domainPath}}\{{modelName}}
  */
-class {{modelName}}Filter implements Filter
+class {{modelName}}Filter
 {
     /**
      * @var string|null

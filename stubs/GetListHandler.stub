@@ -1,7 +1,7 @@
 
 namespace {{commandPath}}\{{modelName}}\Get{{modelName}}List;
 
-use {{repositoryPath}}\{{modelName}}\{{modelName}}Repository;
+use {{domainPath}}\{{modelName}}\{{modelName}}Repository;
 use ItDevgroup\CommandBus\Command;
 use ItDevgroup\CommandBus\Handler;
 
@@ -34,10 +34,9 @@ class Get{{modelName}}ListHandler implements Handler
      */
     public function handle(Command $command)
     {
-        return $this->{{modelNameSingularLowerCaseFirst}}Repository->all(
-            $command->filter(),
-            $command->pagination(),
-            $command->order()
-        );
+        return $this->{{modelNameSingularLowerCaseFirst}}Repository
+        	->setFilter($command->filter())
+        	->setOrder($command->order())
+        	->pagination($command->pagination());
     }
 }
