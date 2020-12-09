@@ -13,8 +13,10 @@ return [
         'test' => 'tests/Feature',
         'doc' => 'api-doc',
         'stub' => null,
+        'route' => base_path('routes/api.php'),
     ],
     'repositoryFilePrefix' => 'Eloquent',
+    'routePrefix' => 'api',
     'generate' => [
         'collection' => true
     ],

@@ -112,6 +112,14 @@ class Config
     /**
      * @return string
      */
+    public function routePath(): string
+    {
+        return $this->config['paths']['route'];
+    }
+
+    /**
+     * @return string
+     */
     public function repositoryFilePrefix(): string
     {
         return $this->config['repositoryFilePrefix'];

@@ -262,10 +262,10 @@ class {{repositoryFilePrefix}}{{modelName}}Repository implements {{modelName}}Re
     }
 
     /**
-     * @param Filter|{{modelName}} $filter
+     * @param {{modelName}}Filter $filter
      * @return void
      */
-    protected function filter($filter): void
+    protected function filter({{modelName}}Filter $filter): void
     {
         if ($filter->query()) {
             $this->builder->where(function (Builder $builder) use ($filter) {
