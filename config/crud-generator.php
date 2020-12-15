@@ -16,7 +16,6 @@ return [
         'route' => base_path('routes/api.php'),
     ],
     'repositoryFilePrefix' => 'Eloquent',
-    'routePrefix' => 'api',
     'generate' => [
         'collection' => true
     ],

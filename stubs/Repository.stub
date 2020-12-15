@@ -26,7 +26,7 @@ interface {{modelName}}Repository
     public function collection(): Collection;
 
     /**
-     * @return {{modelName}}|null|Model
+     * @return {{modelName}}|null|Model|Builder
      */
     public function first(): ?{{modelName}};
 
@@ -78,9 +78,7 @@ interface {{modelName}}Repository
     public function setLimit(int $limit);
 
     /**
-     * @param string $value
-     * @param string|null $key
      * @return bool
      */
-    public function exists(string $value, ?string $key = null): bool;
+    public function exists(): bool;
 }

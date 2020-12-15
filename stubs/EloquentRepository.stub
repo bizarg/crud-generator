@@ -1,7 +1,6 @@
 
 namespace {{repositoryPath}};
 
-use {{domainPath}}\Core\Filter;
 use {{domainPath}}\Core\Order;
 use {{domainPath}}\Core\Pagination;
 use {{domainPath}}\{{modelName}}\{{modelName}};
@@ -100,11 +99,15 @@ class {{repositoryFilePrefix}}{{modelName}}Repository implements {{modelName}}Re
     /**
      * @inheritDoc
      */
-    public function exists(string $value, ?string $key = null): bool
+    public function exists(): bool
     {
         $this->builder = $this->model->newQuery();
 
-        $this->filterAndOrder();
+        if (!$this->filter) {
+            return false;
+        }
+
+        $this->filter($this->filter);
 
         return $this->builder->exists();
     }
@@ -125,7 +128,9 @@ class {{repositoryFilePrefix}}{{modelName}}Repository implements {{modelName}}Re
     {
         $this->builder = $this->model->newQuery();
 
-        $this->filterAndOrder();
+		if ($this->filter) {
+			$this->filter($this->filter);
+		}
 
         return $this->builder->first();
     }
@@ -162,9 +167,14 @@ class {{repositoryFilePrefix}}{{modelName}}Repository implements {{modelName}}Re
 
     /**
      * @inheritDoc
+     * @throws Exception
      */
     public function setFilter(?{{modelName}}Filter $filter): self
     {
+        if (get_class($this->model) . 'Filter' != get_class($filter)) {
+            throw new Exception('Used not valid filter');
+        }
+
         $this->filter = $filter;
         return $this;
     }
