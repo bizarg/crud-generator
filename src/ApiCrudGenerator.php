@@ -281,7 +281,7 @@ class ApiCrudGenerator extends Command
         $string = '<?php' . PHP_EOL;
 
         if ($this->config->needDeclare()) {
-            $string .= PHP_EOL . "declare(strict_types=env('STRICT_TYPES', 1));" . PHP_EOL;
+            $string .= PHP_EOL . 'declare(strict_types=1);' . PHP_EOL;
         }
 
         if ($template == 'ApiDoc' || $template == 'Collection') {
