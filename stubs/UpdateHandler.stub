@@ -5,6 +5,7 @@ use {{domainPath}}\{{modelName}}\{{modelName}};
 use {{domainPath}}\{{modelName}}\{{modelName}}Repository;
 use ItDevgroup\CommandBus\Command;
 use ItDevgroup\CommandBus\Handler;
+use Exception;
 
 /**
  * Class Update{{modelName}}Handler
@@ -30,6 +31,7 @@ class Update{{modelName}}Handler implements Handler
     /**
      * @param Command|Update{{modelName}} $command
      * @return {{modelName}}
+     * @throws Exception
      */
     public function handle(Command $command): {{modelName}}
     {

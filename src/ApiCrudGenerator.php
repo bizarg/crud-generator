@@ -83,7 +83,7 @@ class ApiCrudGenerator extends Command
         $this->put($path . "/{$this->entity}.php", 'Model');
         $this->put($path . "/{$this->entity}Filter.php", 'Filter');
         $this->put($path . "/{$this->entity}NotFound.php", 'NotFound');
-        $this->put($path . "/{$this->entity}Repository.php", 'Repository');
+        $this->put($path . "/{$this->entity}Repository.php", 'RepositoryInterface');
     }
 
     /**
@@ -147,7 +147,7 @@ class ApiCrudGenerator extends Command
 
         $this->makePath($path);
 
-        $this->put($path . "{$this->config->repositoryFilePrefix()}{$this->entity}Repository.php", 'EloquentRepository');
+        $this->put($path . "{$this->config->repositoryFilePrefix()}{$this->entity}Repository.php", 'Repository');
     }
 
     /**
@@ -281,7 +281,7 @@ class ApiCrudGenerator extends Command
         $string = '<?php' . PHP_EOL;
 
         if ($this->config->needDeclare()) {
-            $string .= PHP_EOL . 'declare(strict_types=1);' . PHP_EOL;
+            $string .= PHP_EOL . "declare(strict_types=env('STRICT_TYPES', 1));" . PHP_EOL;
         }
 
         if ($template == 'ApiDoc' || $template == 'Collection') {
@@ -332,11 +332,11 @@ class ApiCrudGenerator extends Command
 
         $route = "
         //  Route::group(['prefix' => '{$prefix}', 'as' => '{$as}.'], function () {
-        //      Route::get('/', '{$this->entity}Controller@index')->entity('index');
-        //      Route::post('/', '{$this->entity}Controller@store')->entity('store');
-        //      Route::put('{{$as}}', '{$this->entity}Controller@update')->entity('update')->where('{$as}', '[0-9]+');
-        //      Route::get('{{$as}}', '{$this->entity}Controller@show')->entity('show')->where('{$as}', '[0-9]+');
-        //      Route::delete('{{$as}}', '{$this->entity}Controller@destroy')->entity('delete')->where('{$as}', '[0-9]+');
+        //      Route::get('/', '{$this->entity}Controller@index')->name('index');
+        //      Route::post('/', '{$this->entity}Controller@store')->name('store');
+        //      Route::put('{{$as}}', '{$this->entity}Controller@update')->name('update')->where('{$as}', '[0-9]+');
+        //      Route::get('{{$as}}', '{$this->entity}Controller@show')->name('show')->where('{$as}', '[0-9]+');
+        //      Route::delete('{{$as}}', '{$this->entity}Controller@destroy')->name('delete')->where('{$as}', '[0-9]+');
         //  });";
 
         file_put_contents(

@@ -53,6 +53,6 @@ return [
 ];
 ```             
 
-    php artisan vendor:bublish --tag=crud-generator-config
-    php artisan vendor:bublish --tag=crud-generator-stubs
+    php artisan vendor:publish --tag=crud-generator-config
+    php artisan vendor:publish --tag=crud-generator-stubs
     php artisan crud:generate UserProjectTest

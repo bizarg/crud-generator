@@ -4,6 +4,7 @@ namespace {{commandPath}}\{{modelName}}\Delete{{modelName}};
 use {{domainPath}}\{{modelName}}\{{modelName}}Repository;
 use ItDevgroup\CommandBus\Command;
 use ItDevgroup\CommandBus\Handler;
+use Exception;
 
 /**
  * Class Delete{{modelName}}Handler
@@ -28,6 +29,7 @@ class Delete{{modelName}}Handler implements Handler
 
     /**
      * @param Command|Delete{{modelName}} $command
+     * @throws Exception
      * @return void
      */
     public function handle(Command $command): void
