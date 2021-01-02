@@ -327,16 +327,16 @@ class ApiCrudGenerator extends Command
      */
     protected function route()
     {
-        $as = StringHelper::camelCase($this->entity);
+        $entity = StringHelper::camelCase($this->entity);
         $prefix = StringHelper::toHyphen(Str::plural($this->entity));
 
         $route = "
-        //  Route::group(['prefix' => '{$prefix}', 'as' => '{$as}.'], function () {
+        //  Route::group(['prefix' => '{$prefix}', 'as' => '{$prefix}.'], function () {
         //      Route::get('/', '{$this->entity}Controller@index')->name('index');
         //      Route::post('/', '{$this->entity}Controller@store')->name('store');
-        //      Route::put('{{$as}}', '{$this->entity}Controller@update')->name('update')->where('{$as}', '[0-9]+');
-        //      Route::get('{{$as}}', '{$this->entity}Controller@show')->name('show')->where('{$as}', '[0-9]+');
-        //      Route::delete('{{$as}}', '{$this->entity}Controller@destroy')->name('delete')->where('{$as}', '[0-9]+');
+        //      Route::put('{{$entity}}', '{$this->entity}Controller@update')->name('update')->where('{$entity}', '[0-9]+');
+        //      Route::get('{{$entity}}', '{$this->entity}Controller@show')->name('show')->where('{$entity}', '[0-9]+');
+        //      Route::delete('{{$entity}}', '{$this->entity}Controller@destroy')->name('delete')->where('{$entity}', '[0-9]+');
         //  });";
 
         file_put_contents(
