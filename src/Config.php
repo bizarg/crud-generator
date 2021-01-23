@@ -151,6 +151,24 @@ class Config
     }
 
     /**
+     * @return CustomTemplate[]
+     */
+    public function custom(): array
+    {
+        $templates = [];
+
+        foreach ($this->config['custom'] ?? [] as $tempalte) {
+            $templates[] = new CustomTemplate(
+                $tempalte['path'],
+                $tempalte['filename'],
+                $tempalte['stub']
+            );
+        }
+
+        return $templates;
+    }
+
+    /**
      * @param string|null $string
      * @return string
      */

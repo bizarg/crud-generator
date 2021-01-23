@@ -30,18 +30,18 @@ config:
 ```PHP
 <?php
 return [
-    'namespace' => 'api',
+    'namespace' => 'app',
     'paths' => [
         'domain' => 'Domain',
         'command' => 'Application',
         'repository' => 'Infrastructure/Eloquent',
-        'controller' => 'Http/Controllers',
+        'controller' => 'Http/Controllers/Api',
         'request' => 'Http/Requests',
         'resource' => 'Http/Resources',
         'migrate' => 'database/migrations',
         'test' => 'tests/Feature',
         'doc' => 'api-doc',
-        'stub' => null,
+        'stub' => 'resources/stubs',
         'route' => base_path('routes/api.php'),
     ],
     'repositoryFilePrefix' => 'Eloquent',
@@ -49,7 +49,14 @@ return [
     'generate' => [
         'collection' => true
     ],
-    'declare' => true
+    'declare' => true,
+    'custom' => [
+        [
+            'path' => 'api/custom/template',
+            'filename' => '%sCustomTemplate',
+            'stub' => 'CustomTemplate'
+        ],
+    ]
 ];
 ```             
 

@@ -19,5 +19,12 @@ return [
     'generate' => [
         'collection' => true
     ],
-    'declare' => true
+    'declare' => true,
+    'custom' => [
+        [
+            'path' => 'api/custom/template',
+            'filename' => 'CustomTemplate',
+            'stub' => 'CustomTemplate'
+        ]
+    ]
 ];

@@ -69,6 +69,12 @@ class ApiCrudGenerator extends Command
         }
 
         $this->route();
+
+        foreach ($this->config->custom() as $template) {
+            $this->makePath($template->path());
+
+            $this->put($template->path() . "/" . sprintf($template->filename(), $this->entity), $template->stub());
+        }
     }
 
     /**
@@ -76,129 +82,143 @@ class ApiCrudGenerator extends Command
      */
     protected function domainFiles(): void
     {
-        $path = $this->config->domainPath() . $this->entity;
+        if ($this->config->domainPath()) {
+            $path = $this->config->domainPath() . $this->entity;
 
-        $this->makePath($path);
+            $this->makePath($path);
 
-        $this->put($path . "/{$this->entity}.php", 'Model');
-        $this->put($path . "/{$this->entity}Filter.php", 'Filter');
-        $this->put($path . "/{$this->entity}NotFound.php", 'NotFound');
-        $this->put($path . "/{$this->entity}Repository.php", 'RepositoryInterface');
+            $this->put($path . "/{$this->entity}.php", 'Model');
+            $this->put($path . "/{$this->entity}Filter.php", 'Filter');
+            $this->put($path . "/{$this->entity}NotFound.php", 'NotFound');
+            $this->put($path . "/{$this->entity}Repository.php", 'RepositoryInterface');
+        }
     }
 
     /**
      * @return void
      */
-    protected function deleteCommand()
+    protected function deleteCommand(): void
     {
-        $path = $this->config->commandPath() . "{$this->entity}/Delete{$this->entity}";
+        if ($this->config->commandPath()) {
+            $path = $this->config->commandPath() . "{$this->entity}/Delete{$this->entity}";
 
-        $this->makePath($path);
+            $this->makePath($path);
 
-        $this->put($path . "/Delete{$this->entity}.php", 'Delete');
-        $this->put($path . "/Delete{$this->entity}Handler.php", 'DeleteHandler');
+            $this->put($path . "/Delete{$this->entity}.php", 'Delete');
+            $this->put($path . "/Delete{$this->entity}Handler.php", 'DeleteHandler');
+        }
     }
 
     /**
      * @return void
      */
-    protected function registerCommand()
+    protected function registerCommand(): void
     {
-        $path = $this->config->commandPath() . "{$this->entity}/Store{$this->entity}";
+        if ($this->config->commandPath()) {
+            $path = $this->config->commandPath() . "{$this->entity}/Store{$this->entity}";
 
-        $this->makePath($path);
+            $this->makePath($path);
 
-        $this->put($path . "/Store{$this->entity}.php", 'Register');
-        $this->put($path . "/Store{$this->entity}Handler.php", 'RegisterHandler');
+            $this->put($path . "/Store{$this->entity}.php", 'Register');
+            $this->put($path . "/Store{$this->entity}Handler.php", 'RegisterHandler');
+        }
     }
 
     /**
      * @return void
      */
-    protected function updateCommand()
+    protected function updateCommand(): void
     {
-        $path = $this->config->commandPath() . "{$this->entity}/Update{$this->entity}";
+        if ($this->config->commandPath()) {
+            $path = $this->config->commandPath() . "{$this->entity}/Update{$this->entity}";
 
-        $this->makePath($path);
+            $this->makePath($path);
 
-        $this->put($path . "/Update{$this->entity}.php", 'Update');
-        $this->put($path . "/Update{$this->entity}Handler.php", 'UpdateHandler');
+            $this->put($path . "/Update{$this->entity}.php", 'Update');
+            $this->put($path . "/Update{$this->entity}Handler.php", 'UpdateHandler');
+        }
     }
 
     /**
      * @return void
      */
-    protected function getListCommand()
+    protected function getListCommand(): void
     {
-        $path = $this->config->commandPath() . "{$this->entity}/Get{$this->entity}List";
+        if ($this->config->commandPath()) {
+            $path = $this->config->commandPath() . "{$this->entity}/Get{$this->entity}List";
 
-        $this->makePath($path);
+            $this->makePath($path);
 
-        $this->put($path . "/Get{$this->entity}List.php", 'GetList');
-        $this->put($path . "/Get{$this->entity}ListHandler.php", 'GetListHandler');
+            $this->put($path . "/Get{$this->entity}List.php", 'GetList');
+            $this->put($path . "/Get{$this->entity}ListHandler.php", 'GetListHandler');
+        }
     }
 
     /**
      * @return void
      */
-    protected function repository()
+    protected function repository(): void
     {
-        $path = $this->config->repositoryPath();
+        if ($path = $this->config->repositoryPath()) {
+            $this->makePath($path);
 
-        $this->makePath($path);
-
-        $this->put($path . "{$this->config->repositoryFilePrefix()}{$this->entity}Repository.php", 'Repository');
+            $this->put($path . "{$this->config->repositoryFilePrefix()}{$this->entity}Repository.php", 'Repository');
+        }
     }
 
     /**
      * @return void
      */
-    protected function controller()
+    protected function controller(): void
     {
-        $path = $this->config->controllerPath();
+        if ($path = $this->config->controllerPath()) {
+            $this->makePath($path);
 
-        $this->makePath($path);
-
-        $this->put($path . "{$this->entity}Controller.php", 'Controller');
+            $this->put($path . "{$this->entity}Controller.php", 'Controller');
+        }
     }
 
     /**
      * @return void
      */
-    protected function request()
+    protected function request(): void
     {
-        $path = $this->config->requestPath() . $this->entity;
+        if ($this->config->requestPath()) {
+            $path = $this->config->requestPath() . $this->entity;
 
-        $this->makePath($path);
+            $this->makePath($path);
 
-        $this->put($path . "/List{$this->entity}Request.php", 'ListRequest');
-        $this->put($path . "/Store{$this->entity}Request.php", 'StoreRequest');
-        $this->put($path . "/Update{$this->entity}Request.php", 'UpdateRequest');
+            $this->put($path . "/List{$this->entity}Request.php", 'ListRequest');
+            $this->put($path . "/Store{$this->entity}Request.php", 'StoreRequest');
+            $this->put($path . "/Update{$this->entity}Request.php", 'UpdateRequest');
+        }
     }
 
     /**
      * @return void
      */
-    protected function test()
+    protected function test(): void
     {
-        $path = $this->config->testPath();
+        if ($path = $this->config->testPath()) {
+            $this->makePath($path);
 
-        $this->makePath($path);
-
-        $this->put($path . "{$this->entity}Test.php", 'Test');
+            $this->put($path . "{$this->entity}Test.php", 'Test');
+        }
     }
 
     /**
      * @return void
      */
-    protected function resource()
+    protected function resource(): void
     {
-        $path = $this->config->resourcePath() . $this->entity;
+        if ($this->config->requestPath()) {
+            $path = $this->config->resourcePath() . $this->entity;
 
-        $this->makePath($path);
+            $this->makePath($path);
 
-        $this->put($path . "/{$this->entity}Resource.php", 'Resource');
-        $this->put($path . "/{$this->entity}ResourceCollection.php", 'ResourceCollection');
+            $this->put($path . "/{$this->entity}Resource.php", 'Resource');
+            $this->put($path . "/{$this->entity}ResourceCollection.php", 'ResourceCollection');
+        }
     }
 
     /**
@@ -206,38 +226,40 @@ class ApiCrudGenerator extends Command
      */
     protected function migrate(): void
     {
-        $path = $this->config->migratePath();
+        if ($path = $this->config->migratePath()) {
+            $this->makePath($path);
 
-        $this->makePath($path);
+            $filename = Carbon::now()->format('Y_m_d_His')
+                . '_create_' . StringHelper::toUnderscore(Str::plural($this->entity)) . '_table.php';
 
-        $filename = Carbon::now()->format('Y_m_d_His')
-            . '_create_' . StringHelper::toUnderscore(Str::plural($this->entity)) . '_table.php';
-
-        $this->put($path . $filename, 'Migrate');
+            $this->put($path . $filename, 'Migrate');
+        }
     }
 
     /**
      * @return void
      */
-    protected function apiDoc()
+    protected function apiDoc(): void
     {
-        $path = $this->config->docPath();
+        if ($path = $this->config->docPath()) {
+            $this->makePath($path);
 
-        $this->makePath($path);
-
-        $this->put($path . "api-" . strtolower(StringHelper::toHyphen(Str::plural($this->entity))) . ".php", 'ApiDoc');
+            $this->put($path . "api-" . strtolower(StringHelper::toHyphen(Str::plural($this->entity))) . ".php", 'ApiDoc');
+        }
     }
 
     /**
      * @return void
      */
-    protected function collection()
+    protected function collection(): void
     {
-        $path = $this->config->docPath() . 'collections';
+        if ($this->config->docPath()) {
+            $path = $this->config->docPath() . 'collections';
 
-        $this->makePath($path);
+            $this->makePath($path);
 
-        $this->put($path . "/{$this->entity}.json", 'Collection');
+            $this->put($path . "/{$this->entity}.json", 'Collection');
+        }
     }
 
     /**
@@ -254,10 +276,10 @@ class ApiCrudGenerator extends Command
     }
 
     /**
-     * @param $type
+     * @param string $type
      * @return false|string
      */
-    protected function getStub($type)
+    protected function getStub(string $type)
     {
         return file_get_contents($this->config->stubPath() . "$type.stub");
     }
