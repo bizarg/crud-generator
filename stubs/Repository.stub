@@ -21,7 +21,7 @@ class {{repositoryFilePrefix}}{{modelName}}Repository implements {{modelName}}Re
     /**
      * @var string
      */
-    protected $table = 'user_projects.';
+    protected $table = '{{modelNamePluralLowerCaseUnderscore}}.';
     /**
      * @var {{modelName}}
      */
