@@ -73,7 +73,7 @@ class ApiCrudGenerator extends Command
         foreach ($this->config->custom() as $template) {
             $this->makePath($template->path());
 
-            $this->put($template->path() . "/" . sprintf($template->filename(), $this->entity), $template->stub());
+            $this->put(sprintf($template->path(), $this->entity) . "/" . sprintf($template->filename(), $this->entity), $template->stub());
         }
     }
 

@@ -52,7 +52,7 @@ return [
     'declare' => true,
     'custom' => [
         [
-            'path' => 'api/custom/template',
+            'path' => 'api/%s/template',
             'filename' => '%sCustomTemplate',
             'stub' => 'CustomTemplate'
         ],
