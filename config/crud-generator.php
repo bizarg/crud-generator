@@ -21,10 +21,10 @@ return [
     ],
     'declare' => true,
     'custom' => [
-        [
-            'path' => 'api/custom/template',
-            'filename' => 'CustomTemplate',
-            'stub' => 'CustomTemplate'
-        ]
+//        [
+//            'path' => 'api/custom/template',
+//            'filename' => 'CustomTemplate',
+//            'stub' => 'CustomTemplate'
+//        ]
     ]
 ];

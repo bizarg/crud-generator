@@ -158,11 +158,13 @@ class Config
         $templates = [];
 
         foreach ($this->config['custom'] ?? [] as $tempalte) {
-            $templates[] = new CustomTemplate(
-                $tempalte['path'],
-                $tempalte['filename'],
-                $tempalte['stub']
-            );
+            if (isset($tempalte['path']) && isset($tempalte['filename']) && isset($tempalte['stub'])) {
+                $templates[] = new CustomTemplate(
+                    $tempalte['path'],
+                    $tempalte['filename'],
+                    $tempalte['stub']
+                );
+            }
         }
 
         return $templates;
