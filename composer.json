@@ -1,7 +1,7 @@
 {
     "name": "bizarg/crud-generator",
     "description": "crud generator",
-    "version": "1.6.1",
+    "version": "1.6.2",
     "minimum-stability": "dev",
     "license": "MIT",
     "authors": [
@@ -17,8 +17,8 @@
     },
     "require": {
         "php": ">=7.1",
-        "illuminate/console": "^6.0|^7.0|^8.0",
-        "illuminate/support": "^6.0|^7.0|^8.0",
+        "illuminate/console": "*",
+        "illuminate/support": "*",
         "bizarg/string-helper": "dev-main"
     }
 }
