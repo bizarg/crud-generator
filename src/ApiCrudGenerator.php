@@ -85,7 +85,7 @@ class ApiCrudGenerator extends Command
             $this->put($path . "/{$this->entity}.php", 'Model');
             $this->put($path . "/{$this->entity}Filter.php", 'Filter');
             $this->put($path . "/{$this->entity}NotFound.php", 'NotFound');
-            $this->put($path . "/{$this->entity}Repository.php", 'RepositoryInterface');
+            $this->put($path . "/{$this->entity}RepositoryInterface.php", 'RepositoryInterface');
         }
     }
 
@@ -357,7 +357,7 @@ class ApiCrudGenerator extends Command
         //  });";
 
         file_put_contents(
-            base_path('routes/api.php'),
+            $this->config->routePath(),
             $route,
             FILE_APPEND
         );

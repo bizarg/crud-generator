@@ -106,7 +106,7 @@ class Config
      */
     public function stubPath(): string
     {
-        return $this->trimSlash($this->config['paths']['stub']) ??  __DIR__ . '/../stubs/';
+        return '/' . $this->trimSlash($this->config['paths']['stub']) ??  __DIR__ . '/../stubs/';
     }
 
     /**
@@ -114,7 +114,7 @@ class Config
      */
     public function routePath(): string
     {
-        return $this->config['paths']['route'];
+        return '/' . ltrim($this->config['paths']['route'], '/');
     }
 
     /**
