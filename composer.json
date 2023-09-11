@@ -19,6 +19,6 @@
         "php": ">=7.1",
         "illuminate/console": "*",
         "illuminate/support": "*",
-        "bizarg/string-helper": "dev-main"
+        "bizarg/string-helper": "^1.0"
     }
 }
