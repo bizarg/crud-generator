@@ -7,46 +7,24 @@ use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 
-/**
- * Class ApiCrudGenerator
- * @package Bizarg\Crud
- */
 class ApiCrudGenerator extends Command
 {
-    /**
-     * @var string
-     */
     protected $signature = 'crud:generate {name : Class (singular) for example User}';
-    /**
-     * @var string
-     */
-    protected $description = 'Create CRUD operations';
-    /**
-     * @var Config
-     */
-    private Config $config;
-    /**
-     * @var string|null
-     */
-    private $entity = null;
-    /**
-     * @var array|null
-     */
-    private $variables = null;
 
-    /**
-     * ApiCrudGenerator constructor.
-     * @param Config $config
-     */
+    protected $description = 'Create CRUD operations';
+
+    private Config $config;
+
+    private ?string $entity = null;
+
+    private ?array $variables = null;
+
     public function __construct(Config $config)
     {
         parent::__construct();
         $this->config = $config;
     }
 
-    /**
-     * @return void
-     */
     public function handle(): void
     {
         $this->entity = StringHelper::upperCaseCamelCase($this->argument('name'));
@@ -72,9 +50,6 @@ class ApiCrudGenerator extends Command
         $this->customTemplate();
     }
 
-    /**
-     * @return void
-     */
     protected function domainFiles(): void
     {
         if ($this->config->domainPath()) {
@@ -89,9 +64,6 @@ class ApiCrudGenerator extends Command
         }
     }
 
-    /**
-     * @return void
-     */
     protected function deleteCommand(): void
     {
         if ($this->config->commandPath()) {
@@ -104,9 +76,6 @@ class ApiCrudGenerator extends Command
         }
     }
 
-    /**
-     * @return void
-     */
     protected function registerCommand(): void
     {
         if ($this->config->commandPath()) {
@@ -119,9 +88,6 @@ class ApiCrudGenerator extends Command
         }
     }
 
-    /**
-     * @return void
-     */
     protected function updateCommand(): void
     {
         if ($this->config->commandPath()) {
@@ -134,9 +100,6 @@ class ApiCrudGenerator extends Command
         }
     }
 
-    /**
-     * @return void
-     */
     protected function getListCommand(): void
     {
         if ($this->config->commandPath()) {
@@ -149,9 +112,6 @@ class ApiCrudGenerator extends Command
         }
     }
 
-    /**
-     * @return void
-     */
     protected function repository(): void
     {
         if ($path = $this->config->repositoryPath()) {
@@ -161,9 +121,6 @@ class ApiCrudGenerator extends Command
         }
     }
 
-    /**
-     * @return void
-     */
     protected function controller(): void
     {
         if ($path = $this->config->controllerPath()) {
@@ -173,9 +130,6 @@ class ApiCrudGenerator extends Command
         }
     }
 
-    /**
-     * @return void
-     */
     protected function request(): void
     {
         if ($this->config->requestPath()) {
@@ -189,9 +143,6 @@ class ApiCrudGenerator extends Command
         }
     }
 
-    /**
-     * @return void
-     */
     protected function test(): void
     {
         if ($path = $this->config->testPath()) {
@@ -201,9 +152,6 @@ class ApiCrudGenerator extends Command
         }
     }
 
-    /**
-     * @return void
-     */
     protected function resource(): void
     {
         if ($this->config->requestPath()) {
@@ -216,9 +164,6 @@ class ApiCrudGenerator extends Command
         }
     }
 
-    /**
-     * @return void
-     */
     protected function migrate(): void
     {
         if ($path = $this->config->migratePath()) {
@@ -231,9 +176,6 @@ class ApiCrudGenerator extends Command
         }
     }
 
-    /**
-     * @return void
-     */
     protected function apiDoc(): void
     {
         if ($path = $this->config->docPath()) {
@@ -243,9 +185,6 @@ class ApiCrudGenerator extends Command
         }
     }
 
-    /**
-     * @return void
-     */
     protected function collection(): void
     {
         if ($this->config->docPath()) {
@@ -257,10 +196,6 @@ class ApiCrudGenerator extends Command
         }
     }
 
-    /**
-     * @param string $path
-     * @return string
-     */
     protected function makePath(string $path): string
     {
         if (!file_exists($path = base_path($path))) {
@@ -270,29 +205,16 @@ class ApiCrudGenerator extends Command
         return $path;
     }
 
-    /**
-     * @param string $type
-     * @return false|string
-     */
-    protected function getStub(string $type)
+    protected function getStub(string $type): bool|string
     {
         return file_get_contents($this->config->stubPath() . "$type.stub");
     }
 
-    /**
-     * @param string $path
-     * @param string $template
-     * @return void
-     */
     protected function put(string $path, string $template): void
     {
         file_put_contents(base_path($path), $this->variableTemplate($template));
     }
 
-    /**
-     * @param string $template
-     * @return string|string[]
-     */
     protected function variableTemplate(string $template): string
     {
         $string = '<?php' . PHP_EOL;
@@ -304,8 +226,14 @@ class ApiCrudGenerator extends Command
         if ($template == 'ApiDoc' || $template == 'Collection') {
             $string = '';
         }
+        $string .= $this->replaceVariables($this->getStub($template));
 
-        $string .= str_replace(
+        return $string;
+    }
+
+    private function replaceVariables(string $content): array|string
+    {
+        return str_replace(
             [
                 '{{namespace}}',
                 '{{modelName}}',
@@ -324,26 +252,21 @@ class ApiCrudGenerator extends Command
                 '{{repositoryFilePrefix}}',
             ],
             $this->variables(),
-            $this->getStub($template)
+            $content
         );
-
-        return $string;
     }
 
-    /**
-     * @param string $path
-     * @return string
-     */
-    public function preparePath($path): string
+    public function preparePath(?string $path): string
     {
         return ucfirst(str_replace('/', '\\', trim($path, '/')));
     }
 
-    /**
-     * @return void
-     */
-    protected function route()
+    protected function route(): void
     {
+        if (is_null($this->config->routePath())) {
+            return;
+        }
+
         $entity = StringHelper::camelCase($this->entity);
         $prefix = StringHelper::toHyphen(Str::plural($this->entity));
 
@@ -363,9 +286,6 @@ class ApiCrudGenerator extends Command
         );
     }
 
-    /**
-     * @return array
-     */
     private function variables(): array
     {
         if (is_array($this->variables)) {
@@ -393,14 +313,11 @@ class ApiCrudGenerator extends Command
         return $this->variables;
     }
 
-    /**
-     * @return void
-     */
     private function customTemplate(): void
     {
         foreach ($this->config->custom() as $template) {
-            $this->makePath($path = sprintf($template->path(), $this->entity));
-            $this->put($path . "/" . sprintf($template->filename(), $this->entity) . ".php", $template->stub());
+            $this->makePath($path = sprintf($this->replaceVariables($template->path()), $this->entity));
+            $this->put($path . "/" . sprintf($this->replaceVariables($template->filename()), $this->entity) . ".php", $template->stub());
         }
     }
 }
