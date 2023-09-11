@@ -22,8 +22,8 @@ return [
     'declare' => true,
     'custom' => [
 //        [
-//            'path' => 'api/custom/template',
-//            'filename' => 'CustomTemplate',
+//            'path' => 'api/custom/{{modelName}}',
+//            'filename' => '{{modelName}}File',
 //            'stub' => 'CustomTemplate'
 //        ]
     ]
