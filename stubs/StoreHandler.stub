@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Application\\{{modelName}}\Store{{modelName}};
+
+use App\Domain\{{modelName}}\{{modelName}};
+use App\Domain\{{modelName}}\{{modelName}}RepositoryInterface;
+use Exception;
+
+class Store{{modelName}}Handler
+{
+    public function __construct(
+        private {{modelName}}RepositoryInterface $repository
+    ) {
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function handle(Store{{modelName}} $command): {{modelName}}
+    {
+        ${{modelNameSingularLowerCaseFirst}} = {{modelName}}::register();
+
+        $this->repository->store(${{modelNameSingularLowerCaseFirst}});
+
+        return ${{modelNameSingularLowerCaseFirst}};
+    }
+}

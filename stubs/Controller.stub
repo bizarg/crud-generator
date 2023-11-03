@@ -1,76 +1,56 @@
+<?php
 
-namespace {{controllerPath}};
+namespace App\Http\Controllers\Api;
 
-use {{commandPath}}\{{modelName}}\Delete{{modelName}}\Delete{{modelName}};
-use {{commandPath}}\{{modelName}}\Get{{modelName}}List\Get{{modelName}}List;
-use {{commandPath}}\{{modelName}}\Store{{modelName}}\Store{{modelName}};
-use {{commandPath}}\{{modelName}}\Update{{modelName}}\Update{{modelName}};
-use {{domainPath}}\{{modelName}}\{{modelName}};
-use {{requestPath}}\{{modelName}}\List{{modelName}}Request;
-use {{requestPath}}\{{modelName}}\Store{{modelName}}Request;
-use {{requestPath}}\{{modelName}}\Update{{modelName}}Request;
-use {{resourcePath}}\{{modelName}}\{{modelName}}Resource;
-use {{resourcePath}}\{{modelName}}\{{modelName}}ResourceCollection;
-use {{domainPath}}\{{modelName}}\{{modelName}}Filter;
-use {{domainPath}}\Core\Order;
-use {{domainPath}}\Core\Pagination;
+use App\Application\{{modelName}}\Delete{{modelName}}\Delete{{modelName}};
+use App\Application\{{modelName}}\Get{{modelName}}List\Get{{modelName}}List;
+use App\Application\{{modelName}}\Store{{modelName}}\Store{{modelName}};
+use App\Application\{{modelName}}\Update{{modelName}}\Update{{modelName}};
+use App\Http\Requests\{{modelName}}\List{{modelName}}Request;
+use App\Http\Requests\{{modelName}}\Store{{modelName}}Request;
+use App\Http\Requests\{{modelName}}\Update{{modelName}}Request;
+use App\Http\Resources\{{modelName}}\{{modelName}}Resource;
+use App\Http\Resources\{{modelName}}\{{modelName}}ResourceCollection;
+use App\Domain\{{modelName}}\{{modelName}};
+use App\Domain\{{modelName}}\{{modelName}}Filter;
+use App\Infrastructure\Core\Pagination;
+use App\Infrastructure\Core\Sorting;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 
-/**
- * Class {{modelName}}Controller
- * @package {{controllerPath}}
- */
 class {{modelName}}Controller extends Controller
 {
-    /**
-     * @param List{{modelName}}Request $request
-     * @return JsonResponse
-     */
     public function index(List{{modelName}}Request $request): JsonResponse
     {
-        $order = Order::fromRequest($request, {{modelName}}::ALLOWED_SORT_FIELDS);
+        $order = Sorting::fromRequest($request, {{modelName}}::ALLOWED_SORT_FIELDS);
         $pagination = Pagination::fromRequest($request);
         $filter = {{modelName}}Filter::fromRequest($request);
 
-        ${{modelNamePluralLowerCase}} = $this->dispatchCommand(new Get{{modelName}}List($filter, $pagination, $order));
+        ${{modelNamePluralLowerCase}} = $this->dispatch(new Get{{modelName}}List($filter, $pagination, $order));
 
         return new JsonResponse(
             new {{modelName}}ResourceCollection(${{modelNamePluralLowerCase}})
         );
     }
 
-    /**
-     * @param Store{{modelName}}Request $request
-     * @return JsonResponse
-     */
     public function store(Store{{modelName}}Request $request): JsonResponse
     {
-        ${{modelNameSingularLowerCaseFirst}} = $this->dispatchCommand(Store{{modelName}}::fromRequest($request));
+        ${{modelNameSingularLowerCaseFirst}} = $this->dispatch(Store{{modelName}}::fromRequest($request));
 
         return new JsonResponse([
             'data' => new {{modelName}}Resource(${{modelNameSingularLowerCaseFirst}})
         ], Response::HTTP_CREATED);
     }
 
-    /**
-     * @param Update{{modelName}}Request $request
-     * @param {{modelName}} ${{modelNameSingularLowerCaseFirst}}
-     * @return JsonResponse
-     */
     public function update(Update{{modelName}}Request $request, {{modelName}} ${{modelNameSingularLowerCaseFirst}}): JsonResponse
     {
-        ${{modelNameSingularLowerCaseFirst}} = $this->dispatchCommand(Update{{modelName}}::fromRequest($request, ${{modelNameSingularLowerCaseFirst}}));
+        ${{modelNameSingularLowerCaseFirst}} = $this->dispatch(Update{{modelName}}::fromRequest($request, ${{modelNameSingularLowerCaseFirst}}));
 
         return new JsonResponse([
             'data' => new {{modelName}}Resource(${{modelNameSingularLowerCaseFirst}})
         ]);
     }
 
-    /**
-     * @param {{modelName}} ${{modelNameSingularLowerCaseFirst}}
-     * @return JsonResponse
-     */
     public function show({{modelName}} ${{modelNameSingularLowerCaseFirst}}): JsonResponse
     {
         return new JsonResponse([
@@ -78,13 +58,9 @@ class {{modelName}}Controller extends Controller
         ]);
     }
 
-    /**
-     * @param {{modelName}} ${{modelNameSingularLowerCaseFirst}}
-     * @return JsonResponse
-     */
     public function destroy({{modelName}} ${{modelNameSingularLowerCaseFirst}}): JsonResponse
     {
-        $this->dispatchCommand(new Delete{{modelName}}(${{modelNameSingularLowerCaseFirst}}));
+        $this->dispatch(new Delete{{modelName}}(${{modelNameSingularLowerCaseFirst}}));
 
         return new JsonResponse(null, Response::HTTP_NO_CONTENT);
     }

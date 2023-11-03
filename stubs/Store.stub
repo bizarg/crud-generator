@@ -1,0 +1,18 @@
+<?php
+
+namespace App\Application\{{modelName}}\Store{{modelName}};
+
+use App\Http\Requests\{{modelName}}\{{modelName}}\Store{{modelName}}Request;
+
+class Store{{modelName}}
+{
+    public function __construct(
+    ) {
+    }
+
+    public static function fromRequest(Store{{modelName}}Request $request): self
+    {
+        return (new self(
+        ));
+    }
+}

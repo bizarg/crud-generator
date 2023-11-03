@@ -1,43 +1,26 @@
+<?php
 
-namespace {{commandPath}}\{{modelName}}\Update{{modelName}};
+namespace App\Application\{{modelName}}\Update{{modelName}};
 
-use {{domainPath}}\{{modelName}}\{{modelName}};
-use {{domainPath}}\{{modelName}}\{{modelName}}Repository;
-use ItDevgroup\CommandBus\Command;
-use ItDevgroup\CommandBus\Handler;
+use App\Domain\{{modelName}}\{{modelName}};
+use App\Domain\{{modelName}}\{{modelName}}Repository;
 use Exception;
 
-/**
- * Class Update{{modelName}}Handler
- * @package {{commandPath}}\{{modelName}}\Update{{modelName}}
- */
-class Update{{modelName}}Handler implements Handler
+class Update{{modelName}}Handler
 {
-    /**
-     * @var {{modelName}}Repository
-     */
-    private {{modelName}}Repository ${{modelNameSingularLowerCaseFirst}}Repository;
-
-    /**
-     * Update{{modelName}}Handler constructor.
-     * @param {{modelName}}Repository ${{modelNameSingularLowerCaseFirst}}Repository
-     */
     public function __construct(
-        {{modelName}}Repository ${{modelNameSingularLowerCaseFirst}}Repository
+        private {{modelName}}Repository $repository
     ) {
-        $this->{{modelNameSingularLowerCaseFirst}}Repository = ${{modelNameSingularLowerCaseFirst}}Repository;
     }
 
     /**
-     * @param Command|Update{{modelName}} $command
-     * @return {{modelName}}
      * @throws Exception
      */
-    public function handle(Command $command): {{modelName}}
+    public function handle(Update{{modelName}} $command): {{modelName}}
     {
         ${{modelNameSingularLowerCaseFirst}} = $command->{{modelNameSingularLowerCaseFirst}}();
 
-        $this->{{modelNameSingularLowerCaseFirst}}Repository->store(${{modelNameSingularLowerCaseFirst}});
+        $this->repository->store(${{modelNameSingularLowerCaseFirst}});
 
         return ${{modelNameSingularLowerCaseFirst}};
     }

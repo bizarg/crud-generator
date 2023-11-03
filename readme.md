@@ -10,52 +10,34 @@ config/app.php
 ```
 template property example CrudGenerate:
 
-     'Api', - {{namespace}} 
-     'CrudGenerate', - {{modelName}} 
-     'crudGenerate', - {{modelNameSingularLowerCaseFirst}}
-     'crudGenerates', - {{modelNamePluralLowerCase}} 
-     'crud_generates', - {{modelNamePluralLowerCaseUnderscore}} 
-     'CrudGenerates', - {{modelNamePlural}} 
-     'crud-generates', - {{modelNamePluralLowerCaseHyphen}} 
-     'Api\Domain', - {{domainPath}} 
-     'Api\Application', - {{commandPath}}
-     'Api\Http\Resources', - {{resourcePath}}
-     'Api\Http\Requests', - {{requestPath}}
-     'Api\Http\Controllers', - {{controllerPath}} 
-     'Api\Infrastructure\Eloquent', - {{repositoryPath}} 
-     'Tests\Feature', - {{testPath}} 
-     'Eloquent', - {{repositoryFilePrefix}}
+     'CrudGenerate' - {{modelName}} 
+     'crudGenerate' - {{modelNameSingularLowerCaseFirst}}
+     'crudGenerates' - {{modelNamePluralLowerCase}} 
+     'crud_generates' - {{modelNamePluralLowerCaseUnderscore}} 
+     'CrudGenerates' - {{modelNamePlural}} 
+     'crud-generates' - {{modelNamePluralLowerCaseHyphen}}
+     '2023_11_02_154414_create_crud_generates_table' - {{migrationName}}
+
 
 config:
 ```PHP
 <?php
+
 return [
-    'namespace' => 'app',
     'paths' => [
-        'domain' => 'Domain',
-        'command' => 'Application',
-        'repository' => 'Infrastructure/Eloquent',
-        'controller' => 'Http/Controllers/Api',
-        'request' => 'Http/Requests',
-        'resource' => 'Http/Resources',
-        'migrate' => 'database/migrations',
-        'test' => 'tests/Feature',
-        'doc' => 'api-doc',
-        'stub' => 'resources/stubs',
-        'route' => base_path('routes/api.php'),
+        'stub' => base_path('resources/stubs'),
     ],
-    'repositoryFilePrefix' => 'Eloquent',
-    'routePrefix' => 'api',
     'generate' => [
-        'collection' => true
+        'collection' => true,
+        'migration' => true
     ],
-    'declare' => true,
-    'custom' => [
+    'templates' => [
         [
-            'path' => 'api/%s/template',
-            'filename' => '%sCustomTemplate',
-            'stub' => 'CustomTemplate'
+            'path' => 'app/Http/Controllers/Api',
+            'filename' => '{{modelName}}Controller',
+            'stub' => 'Controller'
         ],
+        ...
     ]
 ];
 ```             

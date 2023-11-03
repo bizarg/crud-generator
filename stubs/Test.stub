@@ -1,11 +1,8 @@
+<?php
 
 use Illuminate\Http\Response;
-use {{testPath}}\TestCase as BaseTestCase;
+use Tests\Feature\TestCase as BaseTestCase;
 
-/**
- * Class {{modelName}}Test
- * @package {{testPath}}
- */
 class {{modelName}}Test extends BaseTestCase
 {
     /**

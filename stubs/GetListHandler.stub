@@ -1,38 +1,17 @@
+<?php
 
-namespace {{commandPath}}\{{modelName}}\Get{{modelName}}List;
+namespace App\Application\\{{modelName}}\Get{{modelName}}List;
 
-use {{domainPath}}\{{modelName}}\{{modelName}}Repository;
-use ItDevgroup\CommandBus\Command;
-use ItDevgroup\CommandBus\Handler;
+use App\Domain\{{modelName}}\{{modelName}}RepositoryInterface;
 
-/**
- * Class Get{{modelName}}ListHandler
- * @package {{commandPath}}\{{modelName}}\Get{{modelName}}List
- */
-class Get{{modelName}}ListHandler implements Handler
+class Get{{modelName}}ListHandler
 {
-    /**
-     * @var {{modelName}}Repository
-     */
-    private {{modelName}}Repository ${{modelNameSingularLowerCaseFirst}}Repository;
-
-    /**
-     * Get{{modelName}}ListHandler constructor.
-     * @param {{modelName}}Repository ${{modelNameSingularLowerCaseFirst}}Repository
-     */
     public function __construct(
-        {{modelName}}Repository ${{modelNameSingularLowerCaseFirst}}Repository
+        private {{modelName}}Repository ${{modelNameSingularLowerCaseFirst}}Repository
     ) {
-        $this->{{modelNameSingularLowerCaseFirst}}Repository = ${{modelNameSingularLowerCaseFirst}}Repository;
     }
 
-    /**
-     * Handle a Command object
-     *
-     * @param Command|Get{{modelName}}List $command
-     * @return mixed
-     */
-    public function handle(Command $command)
+    public function handle(Get{{modelName}}List $command)
     {
         return $this->{{modelNameSingularLowerCaseFirst}}Repository
         	->setFilter($command->filter())

@@ -1,17 +1,13 @@
+<?php
 
-namespace {{resourcePath}}\{{modelName}};
+namespace App\Http\Resources\{{modelName}};
 
-use {{resourcePath}}\ResourceCollectionWithStandardResponse;
+use App\Http\Resources\BaseCollectionResource;
 
-/**
- * Class {{modelName}}ResourceCollection
- * @package {{resourcePath}}\{{modelName}}
- */
-class {{modelName}}ResourceCollection extends ResourceCollectionWithStandardResponse
+class {{modelName}}ResourceCollection extends BaseCollectionResource
 {
     /**
      * @param object $item
-     * @return {{modelName}}Resource
      */
     protected function getItemData($item): {{modelName}}Resource
     {

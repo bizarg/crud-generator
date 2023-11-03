@@ -4,15 +4,8 @@ namespace Bizarg\Crud;
 
 use Illuminate\Support\ServiceProvider;
 
-/**
- * Class CrudServiceProvider
- * @package Bizarg\Crud
- */
 class CrudServiceProvider extends ServiceProvider
 {
-    /**
-     * @return void
-     */
     public function boot(): void
     {
         if ($this->app->runningInConsole()) {
@@ -32,11 +25,7 @@ class CrudServiceProvider extends ServiceProvider
         }
     }
 
-    /**
-     * @param string $path
-     * @return string
-     */
-    private function configPath($path = ''): string
+    private function configPath(string $path = ''): string
     {
         return function_exists('config_path')
             ? config_path($path)

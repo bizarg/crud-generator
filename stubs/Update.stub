@@ -1,47 +1,25 @@
+<?php
 
-namespace {{commandPath}}\{{modelName}}\Update{{modelName}};
+namespace App\Application\{{modelName}}\Update{{modelName}};
 
-use {{domainPath}}\{{modelName}}\{{modelName}};
-use {{requestPath}}\{{modelName}}\Update{{modelName}}Request;
+use App\Domain\{{modelName}}\{{modelName}};
+use App\Http\Requests\{{modelName}}\{{modelName}}\Update{{modelName}}Request;
 use Illuminate\Http\Request;
-use ItDevgroup\CommandBus\Command;
 
-/**
- * Class Update{{modelName}}
- * @package {{commandPath}}\{{modelName}}\Update{{modelName}}
- */
-class Update{{modelName}} implements Command
+class Update{{modelName}}
 {
-    /**
-     * @var {{modelName}}
-     */
-    private {{modelName}} ${{modelNameSingularLowerCaseFirst}};
-
-    /**
-     * Update{{modelName}} constructor.
-     * @param {{modelName}} ${{modelNameSingularLowerCaseFirst}}
-     */
     public function __construct(
-        {{modelName}} ${{modelNameSingularLowerCaseFirst}}
+        private {{modelName}} ${{modelNameSingularLowerCaseFirst}}
     ) {
-        $this->{{modelNameSingularLowerCaseFirst}} = ${{modelNameSingularLowerCaseFirst}};
     }
 
-    /**
-     * @param Request|Update{{modelName}}Request $request
-     * @param {{modelName}} ${{modelNameSingularLowerCaseFirst}}
-     * @return self
-     */
-    public static function fromRequest(Request $request, {{modelName}} ${{modelNameSingularLowerCaseFirst}}): self
+    public static function fromRequest(Update{{modelName}}Request $request, {{modelName}} ${{modelNameSingularLowerCaseFirst}}): self
     {
         return (new self(
             ${{modelNameSingularLowerCaseFirst}}
         ));
     }
 
-    /**
-     * @return {{modelName}}
-     */
     public function {{modelNameSingularLowerCaseFirst}}(): {{modelName}}
     {
         return $this->{{modelNameSingularLowerCaseFirst}};

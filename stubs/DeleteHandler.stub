@@ -1,39 +1,22 @@
+<?php
 
-namespace {{commandPath}}\{{modelName}}\Delete{{modelName}};
+namespace App\Application\\{{modelName}}\Delete{{modelName}};
 
-use {{domainPath}}\{{modelName}}\{{modelName}}Repository;
-use ItDevgroup\CommandBus\Command;
-use ItDevgroup\CommandBus\Handler;
+use App\Domain\{{modelName}}\{{modelName}}RepositoryInterface;
 use Exception;
 
-/**
- * Class Delete{{modelName}}Handler
- * @package {{commandPath}}\{{modelName}}
- */
-class Delete{{modelName}}Handler implements Handler
+class Delete{{modelName}}Handler
 {
-    /**
-     * @var {{modelName}}Repository
-     */
-    private {{modelName}}Repository ${{modelNameSingularLowerCaseFirst}}Repository;
-
-    /**
-     * Delete{{modelName}}Handler constructor.
-     * @param {{modelName}}Repository ${{modelNameSingularLowerCaseFirst}}Repository
-     */
     public function __construct(
-        {{modelName}}Repository ${{modelNameSingularLowerCaseFirst}}Repository
+        private {{modelName}}RepositoryInterface $repository
     ) {
-        $this->{{modelNameSingularLowerCaseFirst}}Repository = ${{modelNameSingularLowerCaseFirst}}Repository;
     }
 
     /**
-     * @param Command|Delete{{modelName}} $command
      * @throws Exception
-     * @return void
      */
-    public function handle(Command $command): void
+    public function handle(Delete{{modelName}} $command): void
     {
-        $this->{{modelNameSingularLowerCaseFirst}}Repository->delete($command->{{modelNameSingularLowerCaseFirst}}());
+        $this->repository->delete($command->{{modelNameSingularLowerCaseFirst}}());
     }
 }

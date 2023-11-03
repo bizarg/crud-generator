@@ -1,30 +1,104 @@
 <?php
 
 return [
-    'namespace' => 'api',
     'paths' => [
-        'domain' => 'Domain',
-        'command' => 'Application',
-        'repository' => 'Infrastructure/Eloquent',
-        'controller' => 'Http/Controllers',
-        'request' => 'Http/Requests',
-        'resource' => 'Http/Resources',
-        'migrate' => 'database/migrations',
-        'test' => 'tests/Feature',
-        'doc' => 'api-doc',
         'stub' => null,
-        'route' => base_path('routes/api.php'),
     ],
-    'repositoryFilePrefix' => 'Eloquent',
-    'generate' => [
-        'collection' => true
-    ],
-    'declare' => true,
-    'custom' => [
-//        [
-//            'path' => 'api/custom/{{modelName}}',
-//            'filename' => '{{modelName}}File',
-//            'stub' => 'CustomTemplate'
-//        ]
+    'templates' => [
+        [
+            'path' => 'app/Http/Controllers/Api',
+            'filename' => '{{modelName}}Controller',
+            'stub' => 'Controller'
+        ],
+        [
+            'path' => 'app/Domain/{{modelName}}',
+            'filename' => '{{modelName}}Filter',
+            'stub' => 'Filter'
+        ],
+        [
+            'path' => 'app/Domain/{{modelName}}',
+            'filename' => '{{modelName}}',
+            'stub' => 'Model'
+        ],
+        [
+            'path' => 'app/Domain/{{modelName}}',
+            'filename' => '{{modelName}}NotFound',
+            'stub' => 'NotFound'
+        ],
+        [
+            'path' => 'app/Domain/{{modelName}}',
+            'filename' => '{{modelName}}NotFound',
+            'stub' => 'NotFound'
+        ],
+        [
+            'path' => 'app/Application/{{modelName}}/Delete{{modelName}}',
+            'filename' => 'Delete{{modelName}}',
+            'stub' => 'Delete'
+        ],
+        [
+            'path' => 'app/Application/{{modelName}}/Delete{{modelName}}',
+            'filename' => 'Delete{{modelName}}Handler',
+            'stub' => 'DeleteHandler'
+        ],
+        [
+            'path' => 'app/Application/{{modelName}}/Get{{modelName}}List',
+            'filename' => 'Get{{modelName}}List',
+            'stub' => 'GetList'
+        ],
+        [
+            'path' => 'app/Application/{{modelName}}/Get{{modelName}}List',
+            'filename' => 'Get{{modelName}}ListHandler',
+            'stub' => 'GetListHandler'
+        ],
+        [
+            'path' => 'app/Application/{{modelName}}/Register{{modelName}}',
+            'filename' => 'Store{{modelName}}',
+            'stub' => 'Store'
+        ],
+        [
+            'path' => 'app/Application/{{modelName}}/Store{{modelName}}',
+            'filename' => 'Store{{modelName}}Handler',
+            'stub' => 'StoreHandler'
+        ],
+        [
+            'path' => 'app/Application/{{modelName}}/Update{{modelName}}',
+            'filename' => 'Update{{modelName}}',
+            'stub' => 'Update'
+        ],
+        [
+            'path' => 'app/Application/{{modelName}}/Update{{modelName}}',
+            'filename' => 'Update{{modelName}}Handler',
+            'stub' => 'UpdateHandler'
+        ],
+        [
+            'path' => 'app/Http/Requests/{{modelName}}',
+            'filename' => 'List{{modelName}}Request',
+            'stub' => 'ListRequest'
+        ],
+        [
+            'path' => 'app/Http/Requests/{{modelName}}',
+            'filename' => 'Store{{modelName}}Request',
+            'stub' => 'StoreRequest'
+        ],
+        [
+            'path' => 'app/Http/Requests/{{modelName}}',
+            'filename' => 'Update{{modelName}}Request',
+            'stub' => 'UpdateRequest'
+        ],
+        [
+            'path' => 'api-doc/collections/',
+            'filename' => '{{modelNamePluralLowerCaseHyphen}}',
+            'stub' => 'ApiDoc'
+        ],
+        [
+            'path' => 'database/migrations/',
+            'filename' => '{{migrationName}}',
+            'stub' => 'Migration'
+        ],
+        [
+            'path' => 'tests/Feature/',
+            'filename' => '{{modelName}}Test',
+            'stub' => 'Test'
+        ],
     ]
 ];

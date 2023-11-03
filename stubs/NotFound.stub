@@ -1,18 +1,11 @@
+<?php
 
-namespace {{domainPath}}\{{modelName}};
+namespace App\Domain\{{modelName}};
 
-use {{domainPath}}\Core\EntityNotFound;
+use App\Domain\Core\EntityNotFound;
 
-/**
- * Class {{modelName}}NotFound
- * @package {{domainPath}}\{{modelName}}
- */
 class {{modelName}}NotFound extends EntityNotFound
 {
-    /**
-     * @param int $id
-     * @return self
-     */
     public static function fromId(int $id): self
     {
         return new self("{{modelName}} with id #{$id} not found.");

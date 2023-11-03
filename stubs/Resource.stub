@@ -1,18 +1,18 @@
+<?php
 
-namespace {{resourcePath}}\{{modelName}};
+namespace App\Http\Resources\{{modelName}};
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Domain\{{modelName}}\{{modelName}};
 
 /**
- * Class {{modelName}}Resource
- * @package {{resourcePath}}\{{modelName}}
+ * @mixin {{modelName}}
  */
 class {{modelName}}Resource extends JsonResource
 {
     /**
      * @param Request $request
-     * @return array
      */
     public function toArray($request): array
     {
