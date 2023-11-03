@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Application\{{modelName}}\Delete{{modelName}}\Delete{{modelName}};
 use App\Application\{{modelName}}\Get{{modelName}}List\Get{{modelName}}List;
 use App\Application\{{modelName}}\Store{{modelName}}\Store{{modelName}};

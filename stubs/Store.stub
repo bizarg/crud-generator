@@ -2,7 +2,7 @@
 
 namespace App\Application\{{modelName}}\Store{{modelName}};
 
-use App\Http\Requests\{{modelName}}\{{modelName}}\Store{{modelName}}Request;
+use App\Http\Requests\{{modelName}}\Store{{modelName}}Request;
 
 class Store{{modelName}}
 {
