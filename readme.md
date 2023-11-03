@@ -27,10 +27,6 @@ return [
     'paths' => [
         'stub' => base_path('resources/stubs'),
     ],
-    'generate' => [
-        'collection' => true,
-        'migration' => true
-    ],
     'templates' => [
         [
             'path' => 'app/Http/Controllers/Api',
