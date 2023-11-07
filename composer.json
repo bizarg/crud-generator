@@ -1,7 +1,7 @@
 {
     "name": "bizarg/crud-generator",
     "description": "crud generator",
-    "version": "2.0",
+    "version": "2.0.1",
     "minimum-stability": "dev",
     "license": "MIT",
     "authors": [
