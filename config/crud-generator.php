@@ -2,7 +2,7 @@
 
 return [
     'paths' => [
-        'stub' => base_path('resources/stubs'),
+        'stub' => null,
     ],
     'templates' => [
         [
