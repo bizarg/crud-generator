@@ -1,7 +1,7 @@
 {
     "name": "bizarg/crud-generator",
     "description": "crud generator",
-    "version": "2.0.1",
+    "version": "2.0.2",
     "minimum-stability": "dev",
     "license": "MIT",
     "authors": [
@@ -20,5 +20,12 @@
         "illuminate/console": "*",
         "illuminate/support": "*",
         "bizarg/string-helper": "^1.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Bizarg\\Crud\\CrudServiceProvider"
+            ]
+        }
     }
 }
